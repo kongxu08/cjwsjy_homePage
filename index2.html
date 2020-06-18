@@ -444,6 +444,7 @@
 	<script src="js/db/lqb.js"></script>
 	<script src="js/db/pb.js"></script>
 	<script src="js/db/xl.js"></script>
+	<script src="js/db/gp.js"></script>
 	<script>
 		$(function() {
 			//mui.toast($(document).width())
@@ -822,8 +823,9 @@
 				})
 				
 				if($('#总数').find('span').length == 0) {
-					var _spanTotal = _span.clone()
-					$('#总数').append(_spanTotal)
+					var _span = $("<span class='mui-badge2'>")
+					_span.html(parseInt(v))
+					$('#总数').append(_span)
 				} else {
 					var total = parseInt($('#总数').find('span').html());
 					total += parseInt(v);
@@ -867,6 +869,8 @@
 			//陈朋出国管理、人力资源
 			cggl(u.USERNAME)
 			rlzy(u.USERNAME, u.USERID)
+			//督办事项
+			duban(u.USERID)
 
 			//为APP桌面设置小红点待办条数
 			setTimeout(function() {

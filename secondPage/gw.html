@@ -83,27 +83,27 @@
 				</li>
 				<li class="mui-table-view-divider">督办管理</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" id="督办事项申请">
+					<a class="mui-navigate-right" id="TZhbDbsxYwb">
 						申请(测试)
 						</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" id="督办变更申请">
+					<a class="mui-navigate-right" id="TZhbDbsxBglcb">
 						变更(测试)
 					</a>
 				</li>		
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" id="督办终止申请">
+					<a class="mui-navigate-right" id="TZhbDbsxZzlcb">
 						终止(测试)
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" id="督办办结申请">
+					<a class="mui-navigate-right" id="TZhbDbsxBjlcb">
 						办结(测试)
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" id="督办抄送列表">
+					<a class="mui-navigate-right" id="TZhbDbsxCS">
 						抄送列表(测试)
 					</a>
 				</li>																
@@ -122,56 +122,6 @@
 	//取公文待办
 	var dburl = appUrl + '/CEGWAPServer/RecordTotal/getMyTaskTotal_GW/' + u;
 	$(function() {
-		
-		$.getJSON(dburl, function(data) {
-			$.each(data, function(index, item) {
-				if($('#' + item.title).length > 0 && item.count > 0) {
-					var _span = $('<span class="mui-badge mui-badge-danger">')
-					_span.html(item.count)
-					$('#' + item.title).append(_span)
-				}
-			})
-		})
-		//李文迪项目收发文待办
-		$.ajax({
-			url: 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglSwglAppAction.do?getAllTodoNum&uuid='+u,
-			timeout: 3000,
-			dataType: 'json',
-			success: function(data) {
-				$.each(data, function(key, value) {
-					if($('#' + key).length > 0 && value > 0) {
-						var _span = $('<span class="mui-badge mui-badge-danger">')
-						_span.html(value)
-						$('#' + key).append(_span)
-					}
-				})
-			},
-			error: function(e) {
-				mui.toast(e.statusText)
-			}
-
-		});
-		
-		//宋诗文党群部承诺书
-		uid=uid.replace(new RegExp("-","gm"),"");
-		$.ajax({
-			url: 'http://moa.cispdr.com:8066/yh/a/formApi/getzrsSunById?userId='+uid,
-			timeout: 3000,
-			dataType: 'json',
-			success: function(data) {
-				$.each(data.body, function(key, value) {
-					if($('#' + key).length > 0 && value > 0) {
-						var _span = $('<span class="mui-badge mui-badge-danger">')
-						_span.html(value)
-						$('#' + key).append(_span)
-					}
-				})
-			},
-			error: function(e) {
-				mui.toast(e.statusText)
-			}
-		
-		});
 		
 		$('#收文待办').on('click', function() {
 			var url = appUrl + '/CEGWAPServer/GWManage/sw/transact/' + u;
@@ -220,30 +170,29 @@
 			openDWebViewFunction("http://moa.cispdr.com:8066/app_dangqun/#/ApprovalList/tldqfPllcsj", "院领导及三总师承诺书", 'http://moa.cispdr.com:8066/app_dangqun/#/ApprovalList/tldqfPllcsj')
 		})
 		
-		$('#督办事项申请').on('click', function() {
+		$('#TZhbDbsxYwb').on('click', function() {
 			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxLcb";
 			openWebViewFunction(url,"公文管理-督办事项申请")
 		})
-		$('#督办变更申请').on('click', function() {
+		$('#TZhbDbsxBglcb').on('click', function() {
 			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxBglcb";
 			console.log(url)
 			openWebViewFunction(url,"公文管理-督办变更申请")
 		})
-		$('#督办终止申请').on('click', function() {
+		$('#TZhbDbsxZzlcb').on('click', function() {
 			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxZzlcb";
 			openWebViewFunction(url,"公文管理-督办终止申请")
 		})
-		$('#督办办结申请').on('click', function() {
+		$('#TZhbDbsxBjlcb').on('click', function() {
 			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxBjlcb";
 			openWebViewFunction(url,"公文管理-督办办结申请")
 		})
-		$('#督办抄送列表').on('click', function() {
+		$('#TZhbDbsxCS').on('click', function() {
 			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsxcs/myDbsxCSTransact/"+uid;
 			openWebViewFunction(url,"公文管理-督办抄送列表")
 		})
 		
-		
-		
+		callReflashDBCount()
 		
 	})
 	//给手机调用的方法，刷新待办数
@@ -280,6 +229,28 @@
 			}
 
 		});
+		
+		//高鹏督办事项
+		$.ajax({
+			url: 'http://moa.cispdr.com:8066/DBWAPServer/dbsx/DB_Totel_All/'+uid,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				console.log(data)
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && parseInt(value) > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(parseInt(value))
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast(e.statusText)
+			}
+		
+		});
+		
 		//宋诗文党群部承诺书
 		uid=uid.replace(new RegExp("-","gm"),"");
 		$.ajax({
