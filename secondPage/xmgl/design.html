@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>勘测设计咨询项目管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/nav.css" />
+		<style>
+			li.mui-table-view-divider{font-size:12px;}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">勘测设计咨询项目管理</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">	
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="E_ProjectManage">
+						项目信息登记
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_ProjectSign">
+						项目等级评定
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_ProjectManagerAudit">
+						项目经理任命
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_ProjectDepartmentAudit">
+						组建项目部
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_DesignOffice">
+						组建设计代表处
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TS_AuditForm">
+						设计校审
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TS_CollaborationData">
+						互提资料
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="DesignDataVerify">
+						设计资料验证
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="ProjectOutReview">
+						出院成果审查
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TS_SignData">
+						图纸会签
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_SubProjectDepartmentAudit">
+						子项目部组建
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TS_ProductAudit">
+						最终成果确认单审批
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="P_SCRW">
+						项目生产任务书
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="ProjectTarget">
+						项目目标责任书
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_xmjlbg">
+						项目经理变更
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_xmbbg">
+						项目部变更
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_sjdbcbg">
+						设计代表处变更
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="sdclog_form">
+						设代处现场日志审批
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="customer_evaluate_form">
+						项目业主评价
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="pro_check_form">
+						项目年度考核
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="budget_form">
+						项目预算审批
+					</a>
+				</li>	
+				<li class="mui-table-view-divider">项目状态变更</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_pause">
+						 项目暂停申请
+					</a>
+				</li>				
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_reset">
+						 项目复工申请
+					</a>
+				</li>				
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_ending">
+						 项目尾工申请
+					</a>
+				</li>				
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_stop">
+						 项目终止申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="kcsj_end">
+						 项目完工申请
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../../js/mui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-2.2.2.min.js"></script>
+<script src="../../js/app.js"></script>
+<script>
+	//gaopeng用户id
+	var uid = JSON.parse(localStorage.getItem("uo")).USERID;
+	var u = localStorage.getItem('loginName');
+	//项目管理待办
+	var dburl = appUrl+'/CEGWAPServer/RecordTotal/getMyTaskTotal_XM3/' + u;
+	//刘广文项目管理待办
+	var lgwDBUrl = xmglUrl+'/ui/count/GetFlowCount.ashx?action=getcount&userId='+uid;
+	$(function() {
+		//gaopeng项目信息登记
+		$('#E_ProjectManage').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProjectInfoRegister/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-项目信息登记")
+		})
+		//gaopeng项目等级评定
+		$('#T_ProjectSign').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProjectGradeAssess/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-项目等级评定")
+		})
+		//gaopeng项目经理任命
+		$('#T_ProjectManagerAudit').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProjectManagerAudit/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-项目经理任命")
+		})
+		//gaopeng组建项目部
+		$('#T_ProjectDepartmentAudit').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProjectDepartmentAudit/myTransact/'+uid;
+			console.log(url)
+			openWebViewFunction(url,"项目管理-组建项目部")
+		})
+		//gaopeng组建设计代表处
+		$('#T_DesignOffice').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/DesignRepresentativeEstablish/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-组建设计代表处")
+		})
+		//gaopeng设计成果校审
+		$('#TS_AuditForm').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/AuditForm/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-设计成果校审")
+		})
+		//gaopeng互提资料单
+		$('#TS_CollaborationData').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/CollaborationData/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-互提资料单")
+		})
+		//gaopeng设计资料验证
+		$('#DesignDataVerify').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/DesignDataVerify/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-设计资料验证")
+		})
+		//gaopeng出院成果评审
+		$('#ProjectOutReview').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProjectOutReview/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-出院成果评审")
+		})
+		//gaopeng成果会签
+		$('#TS_SignData').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/SignData/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-成果会签")
+		})
+		//gaopeng子项目部组建
+		$('#T_SubProjectDepartmentAudit').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/SonDepartBuild/myTransact/'+uid;
+			openWebViewFunction(url,"项目管理-子项目部组建")
+		})
+		//xuli2最终成果确认单审批
+		$('#TS_ProductAudit').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProductAudit/myTransact/'+uid;
+			openWebViewFunction(url,"最终成果确认单审批")
+		})
+		//项目生产任务书
+		$('#P_SCRW').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/P_SCRW/myTransact/'+uid;
+			openWebViewFunction(url,"项目生产任务书")
+		})
+		//项目目标责任书
+		$('#ProjectTarget').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/ProjectTarget/myTransact/'+uid;
+			openWebViewFunction(url,"项目目标责任书")
+		})
+		
+		//勘察设计-项目经理变更
+		$('#kcsj_xmjlbg').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=20&userId='+uid;
+			openWebViewFunction(url,"项目管理-勘察设计-项目经理变更")
+		})
+		//勘察设计-项目部变更
+		$('#kcsj_xmbbg').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=21&userId='+uid;
+			openWebViewFunction(url,"项目管理-勘察设计-项目部变更")
+		})
+		//勘察设计-设计代表处变更
+		$('#kcsj_sjdbcbg').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=22&userId='+uid;
+			openWebViewFunction(url,"项目管理-勘察设计-设计代表处变更")
+		})	
+		//勘察设计-设代处现场日志审批
+		$('#sdclog_form').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=23&userId='+uid;
+			openWebViewFunction(url,"项目管理-勘察设计-设代处现场日志审批")
+		})
+		//勘察设计-项目业主评价
+		$('#customer_evaluate_form').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=26&userId='+uid;
+			openWebViewFunction(url,"勘察设计-项目业主评价")
+		})
+		//勘察设计-项目年度考核
+		$('#pro_check_form').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=27&userId='+uid;
+			openWebViewFunction(url,"勘察设计-项目年度考核")
+		})	
+		//勘察设计-项目预算审批
+		$('#budget_form').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=25&userId='+uid;
+			openWebViewFunction(url,"勘察设计-项目预算审批")
+		})			
+		//监理-项目暂停申请
+		$('#kcsj_pause').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=15&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目暂停申请")
+		})
+		//监理-项目复工申请
+		$('#kcsj_reset').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=16&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目复工申请")
+		})
+		//监理-项目尾工申请
+		$('#kcsj_ending').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=17&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目尾工申请")
+		})
+		//监理-项目终止申请
+		$('#kcsj_stop').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=18&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目终止申请")
+		})
+		//监理-项目完工申请
+		$('#kcsj_end').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=19&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目完工申请")
+		})
+		callReflashDBCount();
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount(){
+		$('span.mui-badge').remove();
+		//取待办
+		
+		$.ajax({
+			url: "http://moa.cispdr.com:8087/dsp.gw/badge/db_count?type=design&userName="+u,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast("勘察设计项目数字角标获取失败")
+			}
+
+		});
+		//刘广文项目管理待办
+		$.ajax({
+			url: lgwDBUrl,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast("勘察设计项目数字角标获取失败lgw")
+			}
+
+		});
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if(e.persisted) {
+			location.reload();
+		}
+	});
+</script>
+

@@ -1,0 +1,159 @@
+/* html{
+	filter:grayscale(100%)
+} */
+.title {
+	margin: 20px 15px 10px;
+	color: #6d6d72;
+	font-size: 15px;
+}
+
+.oa-contact-cell.mui-table .mui-table-cell {
+	padding: 11px 0;
+	vertical-align: middle;
+}
+
+.oa-contact-cell {
+	position: relative;
+	margin: -11px 0;
+}
+
+.oa-contact-avatar {
+	width: 75px;
+}
+
+.oa-contact-avatar img {
+	border-radius: 50%;
+}
+
+.oa-contact-content {
+	width: 100%;
+}
+
+.oa-contact-name {
+	margin-right: 20px;
+}
+
+.oa-contact-name,
+oa-contact-position {
+	float: left;
+}
+
+.mui-grid-view.mui-grid-9 .mui-media .mui-icon2 {
+	/* font-size:2.4em; */
+	position: relative;
+}
+
+.mui-icon .mui-badge2 {
+	font-size: 10px;
+	line-height: 12px;
+	position: absolute;
+	left: 100%;
+	margin-left: -10px;
+	padding: 1px 5px;
+	color: #fff;
+	background: #DD524D;
+	border-radius: 100px;
+}
+
+.mui-icon2 .mui-badge2 {
+	font-size: 10px;
+	line-height: 12px;
+	position: absolute;
+	left: 100%;
+	margin-left: -20px;
+	padding: 1px 5px;
+	color: #fff;
+	background: #DD524D;
+	border-radius: 100px;
+}
+
+.mui-dot {
+	position: absolute;
+	left: 90%;
+	width: 10px;
+	height: 10px;
+	background: #DD524D;
+	border-radius: 100px;
+}
+
+.mui-search .mui-placeholder {
+    pointer-events: none;
+}
+
+.mui-indexed-list-search.mui-search:before {
+	margin-top: -10px;
+}
+.mui-indexed-list-search input {
+	border-radius: 0px;
+	margin: 0px;
+	background-color: #fafafa;
+}
+.mui-indexed-list-search {
+	border-bottom: solid 1px #e3e3e3;
+	z-index: 9;
+}
+.mui-bar{-webkit-box-shadow: none;box-shadow: none;}
+
+.mui-indexed-list {
+	position: relative;
+	border-top: solid 1px #e3e3e3;
+	border-bottom: solid 1px #e3e3e3;
+	overflow: hidden;
+	background-color: #fafafa;
+	height: 300px;
+	cursor: default;
+}
+
+.mui-grid-view.mui-grid-9 .mui-table-view-cell
+{
+    margin: 0;
+    padding: 5px 5px;
+
+    vertical-align: top;
+
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.mui-grid-view.mui-grid-9 .mui-table-view-cell > a:not(.mui-btn)
+{
+    margin: 0;
+    padding: 8px 0;
+}
+
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body2
+{
+    font-size: 15px;
+    line-height: 15px;
+
+    display: block;
+
+    width: 100%;
+    height: 15px;
+    margin-top: -5px;
+
+    text-overflow: ellipsis;
+
+    color: #333;
+}
+
+div.mui-media{
+	width: 122px !important;
+	height: 122px !important;
+	max-height: 122px !important;
+	max-width: 122px !important;
+	border: 1px solid #ddd;
+	border-radius: 50%;
+	overflow: hidden;
+	text-align:center;
+	margin:0 auto;
+}
+
+img.mui-media {
+	position: relative;
+	width: 120px !important;
+	max-width: 120px !important;
+	height: auto;
+	max-height: auto !important;
+	top: -10px;
+}

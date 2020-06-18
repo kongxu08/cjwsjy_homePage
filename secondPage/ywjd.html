@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>业务接待</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/nav.css" />
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">业务接待</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						（政务）接待申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						（商务、外事）接待申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="业务接待待办">
+						业务接待
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+<script src="../js/app.js"></script>
+<script>
+	var u = localStorage.getItem('loginName')
+	//业务接待
+	var dburl = appUrl+'/CEGWAPServer/JD/getUserDBCount/' + u;
+	$(function() {
+
+		$.getJSON(dburl, function(data) {
+			$.each(data, function(index, item) {
+				if($('#' + item.title).length > 0 && item.count > 0) {
+					var _span = $('<span class="mui-badge mui-badge-danger">')
+					_span.html(item.count)
+					$('#' + item.title).append(_span)
+				}
+			})
+		})
+		
+		//gaopeng（政务）接待申请
+		$('li.mui-table-view-cell:eq(0)').on('click',function(){
+			/*var url = appUrl+'/CEGWAPServer/JD/createForm_zw/'+u;
+			var closeUrl = "/CEGWAPServer/JD/getUserDBList/ /CEGWAPServer/JD/getUserYBList/ /CEGWAPServer/JD/transact/";
+			openWebViewFunction(url,"业务接待-政务申请",closeUrl)*/
+			mui.alert("暂停使用，即将开放，请在PC端操作")
+		})
+		//gaopeng（商务、外事）接待申请
+		$('li.mui-table-view-cell:eq(1)').on('click',function(){
+			var url = appUrl+'/CEGWAPServer/JD/createForm_swws/'+u;
+			var closeUrl = "/CEGWAPServer/JD/getUserDBList/ /CEGWAPServer/JD/getUserYBList/ /CEGWAPServer/JD/transact/";
+			openWebViewFunction(url,"业务接待-商务外事申请",closeUrl)
+		})
+		//gaopeng业务接待
+		$('li.mui-table-view-cell:eq(2)').on('click',function(){
+			var url = appUrl+'/CEGWAPServer/JD/transact/'+u;
+			openWebViewFunction(url,"业务接待-待办")
+		})
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount(){
+		//取待办
+		$.getJSON(dburl, function(data) {
+			console.log(data)
+			$('span.mui-badge').remove();
+			$.each(data, function(index, item) {
+				if($('#' + item.title).length > 0 && item.count > 0) {
+					var _span = $('<span class="mui-badge mui-badge-danger">')
+					_span.html(item.count)
+					$('#' + item.title).append(_span)
+				}
+			})
+		})
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if(e.persisted) {
+			location.reload();
+		}
+	});
+</script>

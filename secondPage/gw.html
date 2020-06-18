@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>公文管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/nav.css" />
+		<style>
+			li.mui-table-view-divider{font-size:12px;}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">公文管理</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				
+				
+				<li class="mui-table-view-divider">综合办公</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="收文待办">
+						收文
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="发文待办">
+						发文
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="一般文件待办">
+						一般文件
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="经办文搜索">
+						经办文搜索
+					</a>
+				</li>
+				
+				
+				<li class="mui-table-view-divider">项目收发文</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TXmbWjglSwgl">
+						项目收文
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TXmbWjglFw">
+						项目发文
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TXmbWjglYbwj">
+						项目一般文件处理
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TXmbWjglWbhytz">
+						项目外部会议通知
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="TXmbWjglChwj">
+						项目参会文件上传
+					</a>
+				</li>
+				<li class="mui-table-view-divider">党群管理</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="zrscns">
+						责任书承诺书签订
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="yldjszscns">
+						院领导及三总师承诺书
+					</a>
+				</li>
+				<li class="mui-table-view-divider">督办管理</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="督办事项申请">
+						申请(测试)
+						</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="督办变更申请">
+						变更(测试)
+					</a>
+				</li>		
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="督办终止申请">
+						终止(测试)
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="督办办结申请">
+						办结(测试)
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="督办抄送列表">
+						抄送列表(测试)
+					</a>
+				</li>																
+			</ul>
+		</div>
+	</body>
+
+</html>
+
+<script src="../js/jquery-2.2.2.min.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/mui.min.js"></script>
+<script>
+	var u = localStorage.getItem('loginName');
+	var uid = JSON.parse(localStorage.getItem("uo")).USERID;
+	//取公文待办
+	var dburl = appUrl + '/CEGWAPServer/RecordTotal/getMyTaskTotal_GW/' + u;
+	$(function() {
+		
+		$.getJSON(dburl, function(data) {
+			$.each(data, function(index, item) {
+				if($('#' + item.title).length > 0 && item.count > 0) {
+					var _span = $('<span class="mui-badge mui-badge-danger">')
+					_span.html(item.count)
+					$('#' + item.title).append(_span)
+				}
+			})
+		})
+		//李文迪项目收发文待办
+		$.ajax({
+			url: 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglSwglAppAction.do?getAllTodoNum&uuid='+u,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast(e.statusText)
+			}
+
+		});
+		
+		//宋诗文党群部承诺书
+		uid=uid.replace(new RegExp("-","gm"),"");
+		$.ajax({
+			url: 'http://moa.cispdr.com:8066/yh/a/formApi/getzrsSunById?userId='+uid,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data.body, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast(e.statusText)
+			}
+		
+		});
+		
+		$('#收文待办').on('click', function() {
+			var url = appUrl + '/CEGWAPServer/GWManage/sw/transact/' + u;
+			openWebViewFunction(url,"公文管理-收文")
+		})
+		$('#发文待办').on('click', function() {
+			var url = appUrl + '/CEGWAPServer/GWManage/fw/transact/' + u;
+			openWebViewFunction(url,"公文管理-发文")
+		})
+		$('#一般文件待办').on('click', function() {
+			var url = appUrl + '/CEGWAPServer/GWManage/ybwj/transact/' + u;
+			openWebViewFunction(url,"公文管理-一般文件")
+		})
+		$('#经办文搜索').on('click', function() {
+			var url = appUrl + '/CEGWAPServer/GWManager/Search_GW.jsp?userName=' + u;
+			openWebViewFunction(url,"公文管理-搜索")
+		})
+		
+		
+		$('#TXmbWjglSwgl').on('click', function() {
+			var url = 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglSwglAppAction.do?goTXmbWjglSwglAppTab&uuid=' + u;
+			openWebViewFunction(url,"公文管理-项目收文")
+		})
+		$('#TXmbWjglFw').on('click', function() {
+			var url = 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglFwAppAction.do?goTXmbWjglFwAppTab&uuid=' + u;
+			openWebViewFunction(url,"公文管理-项目发文")
+		})
+		$('#TXmbWjglYbwj').on('click', function() {
+			var url = 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglYbwjAppAction.do?goTXmbWjglYbwjAppTab&uuid=' + u;
+			openWebViewFunction(url,"公文管理-项目一般文件处理")
+		})
+		$('#TXmbWjglWbhytz').on('click', function() {
+			var url = 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglWbhytzAppAction.do?goTXmbWjglWbhytzAppTab&uuid=' + u;
+			openWebViewFunction(url,"公文管理-项目外部会议通知")
+		})
+		$('#TXmbWjglChwj').on('click', function() {
+			var url = 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglChwjAppAction.do?goTXmbWjglChwjAppTab&uuid=' + u;
+			openWebViewFunction(url,"公文管理-项目参会文件上传")
+		})
+		
+		$('#zrscns').on('click', function() {
+			openDWebViewFunction("http://moa.cispdr.com:8066/app_dangqun/#/ApprovalList/tldqfPllc", "责任书承诺书签订", 'http://moa.cispdr.com:8066/app_dangqun/#/ApprovalList/tldqfPllc')
+		})
+		
+		$('#yldjszscns').on('click', function() {
+			openDWebViewFunction("http://moa.cispdr.com:8066/app_dangqun/#/ApprovalList/tldqfPllcsj", "院领导及三总师承诺书", 'http://moa.cispdr.com:8066/app_dangqun/#/ApprovalList/tldqfPllcsj')
+		})
+		
+		$('#督办事项申请').on('click', function() {
+			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxLcb";
+			openWebViewFunction(url,"公文管理-督办事项申请")
+		})
+		$('#督办变更申请').on('click', function() {
+			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxBglcb";
+			console.log(url)
+			openWebViewFunction(url,"公文管理-督办变更申请")
+		})
+		$('#督办终止申请').on('click', function() {
+			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxZzlcb";
+			openWebViewFunction(url,"公文管理-督办终止申请")
+		})
+		$('#督办办结申请').on('click', function() {
+			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsx/myTransact/"+uid+"/TZhbDbsxBjlcb";
+			openWebViewFunction(url,"公文管理-督办办结申请")
+		})
+		$('#督办抄送列表').on('click', function() {
+			var url = "http://moa.cispdr.com:8066/DBWAPServer/dbsxcs/myDbsxCSTransact/"+uid;
+			openWebViewFunction(url,"公文管理-督办抄送列表")
+		})
+		
+		
+		
+		
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount(){
+		//取待办
+		$.getJSON(dburl, function(data) {
+			console.log(data)
+			$('span.mui-badge').remove();
+			$.each(data, function(index, item) {
+				if($('#' + item.title).length > 0 && item.count > 0) {
+					var _span = $('<span class="mui-badge mui-badge-danger">')
+					_span.html(item.count)
+					$('#' + item.title).append(_span)
+				}
+			})
+		})
+		
+		//李文迪项目收发文待办
+		$.ajax({
+			url: 'http://moa.cispdr.com:8066/cjwsjy-xmgl/txmbWjglSwglAppAction.do?getAllTodoNum&uuid='+u,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast(e.statusText)
+			}
+
+		});
+		//宋诗文党群部承诺书
+		uid=uid.replace(new RegExp("-","gm"),"");
+		$.ajax({
+			url: 'http://moa.cispdr.com:8066/yh/a/formApi/getzrsSunById?userId='+uid,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data.body, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast(e.statusText)
+			}
+		
+		});
+
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if(e.persisted) {
+			location.reload();
+		}
+	});
+</script>

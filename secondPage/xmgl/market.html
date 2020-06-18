@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>经营管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/nav.css" />
+		<style>
+			li.mui-table-view-divider{font-size:12px;}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">经营管理</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="投标网址信息">
+						投标网址信息
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_BidRecordApply">
+						投标备案申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_BackLetter">
+						保函保证金申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_Qualification">
+						资质借用申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="pro_cooperate_form">
+						项目合作协议审签
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="E_InComeHasContract">
+						收入合同风险评估
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="incontract_change">
+						收入合同变更
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="E_InvoiceInfo">
+						发票申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_OutContractAuditNew">
+						外委立项申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_OutContractAuditFlow">
+						外委合同审核与分包方选择评价
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_OutContractChange">
+						外委合同变更
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_ContractPaymentShenqian">
+						付款审签
+					</a>
+				</li>
+
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../../js/mui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-2.2.2.min.js"></script>
+<script src="../../js/app.js"></script>
+<script>
+	//gaopeng用户id
+	var uid = JSON.parse(localStorage.getItem("uo")).USERID;
+	var u = localStorage.getItem('loginName');
+	//项目管理待办
+	var dburl = appUrl + '/CEGWAPServer/RecordTotal/getMyTaskTotal_XM3/' + u;
+	//刘广文项目管理待办
+	var lgwDBUrl = xmglUrl + '/ui/count/GetFlowCount.ashx?action=getcount&userId=' + uid;
+	$(function() {
+		//投标网址信息
+		$('#投标网址信息').parent().on('click', function() {
+			var url = xmglUrl + '/ui/form/websitelist.aspx';
+			openWebViewFunction(url, "市场经营-投标网址信息")
+		})
+		//gaopeng投标备案申请
+		$('#T_BidRecordApply').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/BidRecordApply/myTransact/' + uid;
+			openWebViewFunction(url, "市场经营-投标备案申请")
+		})
+		//gaopeng资质借用
+		$('#T_Qualification').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/XMManage/myQualification/myTransact/' + u;
+			openWebViewFunction(url, "市场经营-资质借用")
+		})
+		//gaopeng保函保证金申请
+		$('#T_BackLetter').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/XMManage/myBackLetter/myTransact/' + u;
+			openWebViewFunction(url, "市场经营-保函保证金申请")
+		})
+		//gaopeng收入合同风险评估
+		$('#E_InComeHasContract').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/XMManage/myProjectRiskEvaluation/myTransact/' + u;
+			openWebViewFunction(url, "市场经营-收入合同风险评估")
+		})
+		//gaopeng发票申请
+		$('#E_InvoiceInfo').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/XMManage/myInvoiceInfo/myTransact/' + u;
+			openWebViewFunction(url, "市场经营-发票申请")
+		})
+		//gaopeng付款审签
+		$('#T_ContractPaymentShenqian').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/XMManage/myContractPaySH/myTransact/' + u;
+			console.log(url)
+			openWebViewFunction(url, "市场经营-付款审签")
+		})
+		//收入合同变更
+		$('#incontract_change').parent().on('click', function() {
+			var url = xmglUrl + '/ui/main/workflow.aspx?mk=24&userId=' + uid;
+			openWebViewFunction(url, "市场经营-收入合同变更")
+		})
+		//外委变更
+		$('#T_OutContractChange').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/OutContractAuditBG/myTransact/' + uid;
+			openWebViewFunction(url, "市场经营-外委变更")
+		})
+		//外委立项申请
+		$('#T_OutContractAuditNew').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/T_OutContractAuditNew/myTransact/' + uid;
+			openWebViewFunction(url, "市场经营-外委立项申请")
+		})
+		//外委合同审核与分包方选择评价
+		$('#T_OutContractAuditFlow').parent().on('click', function() {
+			var url = appUrl + '/CEGWAPServer/T_OutContractAuditFlow/myTransact/' + uid;
+			openWebViewFunction(url, "市场经营-外委合同审核与分包方选择评价")
+		})
+		//市场经营-项目合作协议审签
+		$('#pro_cooperate_form').parent().on('click', function() {
+			var url = xmglUrl + '/ui/main/workflow.aspx?mk=28&userId=' + uid;
+			openWebViewFunction(url, "市场经营-项目合作协议审签")
+		})
+		
+		callReflashDBCount()
+
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount() {
+		$('span.mui-badge').remove();
+		//取待办
+		$.ajax({
+			url: "http://moa.cispdr.com:8087/dsp.gw/badge/db_count?type=market&userName="+u,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if ($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast("经营管理数字角标获取失败")
+			}
+
+		});
+		//刘广文项目管理待办
+		$.ajax({
+			url: lgwDBUrl,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if ($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast("经营管理数字角标获取失败lgw")
+			}
+
+		});
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if (e.persisted) {
+			location.reload();
+		}
+	});
+</script>

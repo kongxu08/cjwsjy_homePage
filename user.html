@@ -1,0 +1,222 @@
+<!doctype html>
+<html manifest="app.manifest">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>用户</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<link rel="stylesheet" type="text/css" href="css/nav.css" />
+		<style type="text/css">
+			dl{
+				color: #8f8f94;
+				font-size: 14px;
+			}
+			.mui-content-padded dl:before {
+			    content: '';
+			    display: block;
+			    width: 1rem;
+			    height: 1rem;
+			    box-sizing: border-box;
+			    border-radius: 50%;
+			    border: 4px solid #dcdddd;
+			    left: -.5rem;
+			    top: 1rem;
+			    float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;"></h1>
+		</header>
+		<div style="background-color:#0F77BD;margin-top: 44px;padding-bottom:10px;color: #FFFFFF;">
+			<div class="mui-content-padded mui-text-center">
+				<img id='userImg' class="mui-media-object" src="images/user-photo.png" />
+			</div>
+			<div class="mui-text-center" id="userDisplayName"></div>
+			<div class="mui-text-center" id="dept"></div>
+			<div class="mui-text-center" id="jobNum"></div>
+		</div>
+		<div class="mui-text-center"  style="height: 44px;background-color:#F7F7F7 ;">
+			<a href="#call"><img src="images/moudle/btn_detail_call@2x.png" width="44px" style="margin-right: 10px;" /></a>
+			<a href="#message"><img src="images/moudle/btn_detail_message@2x.png" width="44px" style="margin-right: 10px;" /></a>
+			<a id="email"><img src="images/moudle/btn_detail_email@2x.png" width="44px" style="margin-right: 10px;" /></a>
+			<a><img src="images/moudle/btn_detail_add@2x.png" width="44px" style="margin-right: 10px;" /></a>
+		</div>
+		<div class="mui-content-padded" style="margin: .5rem 2rem 2rem 2rem">
+			<dl id='POSTDUTY'>职称：</dl>
+			<dl id='ORG'>所属机构：</dl>
+			<dl id='DEPT'>所在部门：</dl>
+			<dl id='OFFICEADDRESS'>办公室地址：</dl>
+			<dl id='MOBILE'>手机号码：</dl>
+			<dl id='MOBILEIPHONE'>移动号码：</dl>
+			<dl id='MOBILESHORTNUMBER'>移动短号：</dl>
+			<dl id='TELEPHONE'>办公电话：</dl>
+			<dl id='IMACCOUNTS'>电子邮箱：</dl>
+		</div>
+		<div id="call" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#forward"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<div id="message" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#forward"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+<script src="js/mui.min.js"></script>
+<script src='js/app.js'></script>
+<script>
+	$(function() {
+		//var userId = parent.$("#userId").val(); //访问父页面元素值  
+		//var userId = getUrlParms("userId");
+		var userId = window.localStorage.contact_userId;
+		$.getJSON("userData/txl.json", function(data) {
+			var userOrg = data.user_orgList.filter(function(e) {
+						return e.USER_RID == userId;					
+					});
+			var dept = data.orgList.filter(function(e) {
+							return e.DEPTID == userOrg[0].ORG_RID;
+						});
+			var user = data.userList.filter(function(e) {
+				return e.USERID == userId;
+			});
+			$("#head_title").html(user[0].USERDISPLAYNAME)
+			$("#userImg").attr("src", "http://moa.cispdr.com:8088/CEGWAPServer/InterSource/getUserPicByte/" + user[0].USERNAME)
+			$("#userDisplayName").html(user[0].USERDISPLAYNAME)
+			$("#jobNum").html(user[0].JOBNUMBER)
+			$("#POSTDUTY").append(user[0].POSTDUTY)
+			$("#OFFICEADDRESS").append(user[0].OFFICEADDRESS)
+			$("#MOBILE").append(user[0].MOBILE)
+			$("#MOBILEIPHONE").append(user[0].MOBILEIPHONE)
+			$("#MOBILESHORTNUMBER").append(user[0].MOBILESHORTNUMBER)
+			$("#TELEPHONE").append(user[0].TELEPHONE)
+			$("#IMACCOUNTS").append(user[0].IMACCOUNTS.substr(4))
+			
+			$("#DEPT").append(dept[0].DISPLAYNAME)
+			
+			if(userOrg.length>0){
+				$("#userDisplayName").append(" "+userOrg[0].USERTITLE)
+			}
+			
+			
+			genParent(dept[0].PARENTID)
+			
+			//绑定发邮件BTN
+			$("#email").on('tap',function(){
+				var btnArray = ['确定', '取消'];
+				mui.confirm('系统邮件', '打开', btnArray, function(e) {
+				    if (e.index == 0) {
+				          window.location.href='mailto:'+user[0].IMACCOUNTS.substr(4);
+				        } else {                        
+				        }
+				 })
+				return false;
+			})
+			//初始化打电话发短信
+			var callsheet = $("#call ul:eq(0)");
+			var messagesheet = $("#message ul:eq(0)");
+			if(user[0].MOBILE!=""){
+				var _li = $("<li class='mui-table-view-cell'>")
+				var _a = $("<a href='tel:"+user[0].MOBILE+"'>")
+				_a.appendTo(_li);
+				_a.html($("#MOBILE").html())
+				_li.appendTo(callsheet)
+				
+				var _li2 = $("<li class='mui-table-view-cell'>")
+				var _a2 = $("<a href='sms:"+user[0].MOBILE+"'>")
+				_a2.appendTo(_li2);
+				_a2.html($("#MOBILE").html())
+				_li2.appendTo(messagesheet)
+			}
+			if(user[0].MOBILEIPHONE!=""){
+				var _li = $("<li class='mui-table-view-cell'>")
+				var _a = $("<a href='tel:"+user[0].MOBILEIPHONE+"'>")
+				_a.appendTo(_li);
+				_a.html($("#MOBILEIPHONE").html())
+				_li.appendTo(callsheet)
+				
+				var _li2 = $("<li class='mui-table-view-cell'>")
+				var _a2 = $("<a href='sms:"+user[0].MOBILEIPHONE+"'>")
+				_a2.appendTo(_li2);
+				_a2.html($("#MOBILEIPHONE").html())
+				_li2.appendTo(messagesheet)
+			}
+			if(user[0].MOBILESHORTNUMBER!=""){
+				var _li = $("<li class='mui-table-view-cell'>")
+				var _a = $("<a href='tel:"+user[0].MOBILESHORTNUMBER+"'>")
+				_a.appendTo(_li);
+				_a.html($("#MOBILESHORTNUMBER").html())
+				_li.appendTo(callsheet)
+				
+				var _li2 = $("<li class='mui-table-view-cell'>")
+				var _a2 = $("<a href='sms:"+user[0].MOBILESHORTNUMBER+"'>")
+				_a2.appendTo(_li2);
+				_a2.html($("#MOBILESHORTNUMBER").html())
+				_li2.appendTo(messagesheet)
+			}
+			if(user[0].TELEPHONE!=""){
+				var _li = $("<li class='mui-table-view-cell'>")
+				var _a = $("<a href='tel:"+user[0].TELEPHONE+"'>")
+				_a.appendTo(_li);
+				_a.html($("#TELEPHONE").html())
+				_li.appendTo(callsheet)
+			}
+		})
+		
+		//查找根机构
+		function genParent(orgId){
+			if(orgId==undefined) return;
+			$.getJSON("userData/txl.json", function(data) {
+				var dept = data.orgList.filter(function(e) {
+					return e.DEPTID == orgId;
+				});
+				if(dept[0].PARENTID=='A90AEAEC-E3D4-43DE-BB67-85407B57B171'){
+					$("#ORG").append(dept[0].DISPLAYNAME)
+				}else{
+					return genParent(dept[0].PARENTID)
+				}
+			})
+		}
+		
+		mui.init();
+		mui('body').on('shown', '.mui-popover', function(e) {
+			//console.log('shown', e.detail.id);//detail为当前popover元素
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			//console.log('hidden', e.detail.id);//detail为当前popover元素
+		});
+		mui('body').on('tap', '.mui-popover-action li>a', function() {
+			var a = this,
+				parent;
+			//根据点击按钮，反推当前是哪个actionsheet
+			for (parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+				if (parent.classList.contains('mui-popover-action')) {
+					break;
+				}
+			}
+			window.location.href=$(a).attr('href')
+			//关闭actionsheet
+			mui('#' + parent.id).popover('toggle');
+		})
+	})
+
+</script>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<!--<html manifest="app.manifest">-->
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>长江设计</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css" />
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<link rel="stylesheet" type="text/css" href="css/nav.css" />
+		<style>
+			.title_box{
+				height: 43px;
+				line-height: 43px;
+				font-size: 15px;
+				font-weight: bold;
+				text-overflow: ellipsis;
+				color: #333;  
+				box-sizing: border-box;
+				padding-left: 15px;
+				background: #ffffff;
+			}
+			.title_box img{
+				width: 35px !important;
+			}
+			.mui-icon2 img{
+				margin: 7px; 
+				margin-top: 0px;
+				width: 50px !important;
+			} 
+		</style>
+	</head>
+
+	<body class="mui-fullscreen">
+
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="#tabbar">
+				<span class="mui-icon mui-icon-home-filled" id="总数"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="#contact">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-peoples"></span>
+				<span class="mui-tab-label">通讯录</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-chat">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">应用</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-my">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+
+		</nav>
+
+		<div class="mui-content">
+			<div id="tabbar" class="mui-control-content mui-active">
+				<!-- <img style="width: 100%;" id="topImg" src="images/img_homepageFY.png" /> -->
+				<div id="slider" class="mui-slider" style="height: 171px;">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img style="width: 100%;"  src="images/img_homepageDefault.png" />
+							</a>
+						</div> 
+						<!-- 第一张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img style="width: 100%;"  src="images/img_homepageDefault.png" />
+							</a>
+						</div>
+						<!-- 第二张 -->
+						<div class="mui-slider-item" >
+							<a href="#">
+								<img style="width: 100%;"  src="images/img_homepageDefault.png" />
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img style="width: 100%;"  src="images/img_homepageDefault.png" />
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="margin-top:-5px;background-color: #FFFFFF;border-bottom:4px solid #efeff4;padding-bottom: 5px;overflow: hidden;">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;">
+						<a href="secondPage/gw.html">
+							<span class="mui-icon2" id="公文管理待办">
+								<img src="images/moudle/btn_home_new_page@2x.png" />
+							</span>
+							<div class="mui-media-body2">公文管理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id='yqb' style="border:none;">
+						<a href="###">
+							<span class="mui-icon2" id="院签报待办"><img src="images/moudle/btn_home_new_signature@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">院签报</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="yz" style="border:none;">
+						<a href="###">
+							<span class="mui-icon2" id="印章待办"><img src="images/moudle/btn_home_new_stump@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">印章管理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="outweb" style="border:none;">
+						<a href="###">
+							<span class="mui-icon2" id="出差审批待办"><img src="images/moudle/btn_home_new_out@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">出差审批</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
+						<a href="secondPage/ywjd.html">
+							<span class="mui-icon2" id="业务接待待办"><img src="images/moudle/btn_home_new_business@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">业务接待</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
+						<a href="secondPage/cggl.html">
+							<span class="mui-icon2" id="出国管理待办"><img src="images/moudle/btn_home_new_abroad@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">出国管理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
+						<a href="###">
+							<span class="mui-icon2" id="wdtp"><img src="images/moudle/btn_home_tp.png" width="64px" /></span>
+							<div class="mui-media-body2">我的投票</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
+						<a href="secondPage/hygl.html">
+							<span class="mui-icon2" id="会议管理待办"><img src="images/moudle/btn_home_new_meet@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">会议管理</div>
+						</a>
+					</li>
+				</ul>
+
+				<!-- 疫情防控 -->
+				<div class="title_box">
+					<img src="images/moudle/btn_home_title-yqfk.png" width="43px" style="vertical-align: middle;" /> 疫情防控
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;border-bottom:4px solid #efeff4;">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="xctb"><img src="images/moudle/btn_home_xctb.png" width="64px" /></span>
+							<div class="mui-media-body2">行程填报</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="hsjc"><img src="images/moudle/btn_home_hsjc.png" width="64px" /></span>
+							<div class="mui-media-body2">核酸检测</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="yqfk"><img src="images/moudle/btn_home_yqfk.png" width="64px" /></span>
+							<div class="mui-media-body2">疫情上报</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="jkm"><img src="images/moudle/btn_home_jkm.png" width="64px" /></span>
+							<div class="mui-media-body2">出入登记</div>
+						</a>
+					</li>
+				</ul>
+
+				<!-- 项目管理 -->
+				<div class="title_box">
+					<img src="images/moudle/btn_home_new_project@2x.png" width="43px" style="vertical-align: middle;" /> 项目管理
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="margin-top:-5px;background-color: #FFFFFF;border-bottom:4px solid #efeff4;">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="zdxmgz">
+						<a href="###">
+							<span class="mui-icon2" id="项目跟进"><img src="images/moudle/btn_app_zdxmgz.png" width="64px" /></span>
+							<div class="mui-media-body2">项目跟进</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/xmgl/strategy.html">
+							<span class="mui-icon2" id="strategy"><img src="images/moudle/btn_home_new_knowledge@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">战略管理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/xmgl/market.html">
+							<span class="mui-icon2" id="market"><img src="images/moudle/btn_home_jygl.png" width="64px" /></span>
+							<div class="mui-media-body2">经营管理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/xmgl/design.html">
+							<span class="mui-icon2" id="design"><img src="images/moudle/btn_home_kcsjzxxmgl.png" width="64px" /></span>
+							<div class="mui-media-body2">勘测设计</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/xmgl/epc.html">
+							<span class="mui-icon2" id="epc">
+								<img src="images/moudle/btn_home_zcbxmgl.png" width="64px" />
+							</span>
+							<div class="mui-media-body2">总承包</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/xmgl/supervisor.html">
+							<span class="mui-icon2" id="supervisor"><img src="images/moudle/btn_home_jlxmgl.png" width="64px" /></span>
+							<div class="mui-media-body2">监理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/kygl.html">
+							<span class="mui-icon2" id="科研项目管理待办"><img src="images/moudle/btn_home_kygl.png" width="64px" /></span>
+							<div class="mui-media-body2">科研项目</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/dagl.html">
+							<span class="mui-icon2" id="档案管理待办"><img src="images/moudle/btn_home_new_archive@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">档案管理</div>
+						</a>
+					</li>
+
+				</ul>
+
+				<!-- 财务管理 -->
+				<div class="title_box">
+					<img src="images/moudle/btn_home_title_cwgl.png" width="43px" style="vertical-align: middle;" /> 财务管理
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;border-bottom:4px solid #efeff4;">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/wsbx.html">
+							<span class="mui-icon2" id="网上报销待办"><img src="images/moudle/btn_home_wsbx.png" width="64px" /></span>
+							<div class="mui-media-body2">网上报销</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/qzjy.html">
+							<span class="mui-icon2" id="权证借用待办"><img src="images/moudle/btn_home_qzjy.png" width="64px" /></span>
+							<div class="mui-media-body2">权证借用</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="dzyhp"><img src="images/moudle/btn_home_dzyhp.png" width="64px" /></span>
+							<div class="mui-media-body2">低值易耗品</div>
+						</a>
+					</li>
+				</ul>
+
+				<!-- 人力资源 -->
+				<div class="title_box">
+					<img src="images/moudle/btn_home_title_rlzy.png" width="43px" style="vertical-align: middle;" /> 人力资源
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;">
+					<!-- <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/rlzy.html">
+							<span class="mui-icon2" id="人力资源待办"><img src="images/moudle/btn_home_hr.png" width="64px" /></span>
+							<div class="mui-media-body2">人力资源</div>
+						</a>
+					</li>	 -->
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="secondPage/rlzy.html">
+							<span class="mui-icon2" id="人力资源待办"><img src="images/moudle/btn_home_rssp.png" width="64px" /></span>
+							<div class="mui-media-body2">人事审批</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="rl_rccx">
+						<a href="###">
+							<span class="mui-icon2"><img src="images/moudle/btn_home_ygcx.png" width="64px" /></span>
+							<div class="mui-media-body2">员工查询</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="rl_xzcx">
+						<a href="###">
+							<span class="mui-icon2"><img src="images/moudle/btn_app_new_wage@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">薪资查询</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="gzjx"><img src="images/moudle/btn_home_new_jxpt.png" width="64px" /></span>
+							<div class="mui-media-body2">绩效管理</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="contact" class="mui-control-content">
+				<header class="mui-bar2 mui-bar-nav2">
+					<h1 class="mui-title" style="color: #FFFFFF;">通讯录</h1>
+				</header>
+				<div style="height: 44px;"></div>
+				<div class="mui-indexed-list-search mui-input-row mui-search">
+					<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="姓名、拼音、电话">
+				</div>
+				<ul class="mui-table-view">
+				</ul>
+				<ul class="mui-table-view">
+				</ul>
+			</div>
+
+			<div id="tabbar-with-chat" class="mui-control-content">
+				<header class="mui-bar2 mui-bar-nav2">
+					<h1 class="mui-title" style="color: #FFFFFF;">应用</h1>
+				</header>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF; padding-top: 44px;">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="xwzx">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_news@2x.png" width="64px" />
+							<div class="mui-media-body">新闻中心</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="mess">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_canteen@2x.png" width="64px" />
+							<div class="mui-media-body">餐饮服务</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="dhys">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_meet@2x.png" width="64px" />
+							<div class="mui-media-body">订会议室</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="xzcx">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_wage@2x.png" width="64px" />
+							<div class="mui-media-body">薪资查询</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="fwdh">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_service@2x.png" width="64px" />
+							<div class="mui-media-body">服务电话</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="gcgf">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_standard@2x.png" width="64px" />
+							<div class="mui-media-body">规程规范</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="clgl">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_car@2x.png" width="64px" />
+							<div class="mui-media-body">车辆管理</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="zcsm">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_scan@2x.png" width="64px" />
+							<div class="mui-media-body">资产扫码</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4" id="zsgl">
+						<a href="#">
+							<img src="images/moudle/btn_app_new_zsgl.png" width="64px" />
+							<div class="mui-media-body">知识管理(测试)</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="tabbar-with-my" class="mui-control-content">
+				<header class="mui-bar2 mui-bar-nav2">
+					<h1 class="mui-title" style="color: #FFFFFF;">我的</h1>
+				</header>
+				<div class="title" style=" padding-top: 44px;">
+					<div class="mui-content-padded mui-media">
+						<img id='userImg' class="mui-media" src="userData/user-photo.png" />
+					</div>
+					<div class="mui-text-center">
+						<span id="currentUserDisplayName"></span>
+						<br />
+						<span id="currentUserJobNumber"></span>
+					</div>
+				</div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" id="fptt">
+						<a class="mui-navigate-right">
+							发票抬头
+						</a>
+					</li>
+					<li class="mui-table-view-cell" id="appUpdate">
+						<a>
+							软件升级
+						</a>
+					</li>
+					<li class="mui-table-view-cell" id="bussinessCard">
+						<a>
+							名片管理
+						</a>
+					</li>
+				</ul>
+
+				<ul class="mui-table-view" style="margin-top: 25px;">
+					<li class="mui-table-view-cell" id="logOut">
+						<a style="text-align: center;color: #FF3B30;" href="#">
+							退出登录
+						</a>
+					</li>
+				</ul>
+				<div class="mui-text-center" style="margin-top: 44px;">
+					<h5 class="mui-h5">您正在使用长江勘测规划设计研究院</h5>
+					<h5 class="mui-h5" id="currentVersion"></h5>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="userData/user.js"></script>
+	<script src="js/jquery-2.2.2.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/mui.min.js"></script>
+
+	<script src="js/db/cp.js"></script>
+	<script src="js/db/ssw.js"></script>
+	<script src="js/db/lwd.js"></script>
+	<script src="js/db/lqb.js"></script>
+	<script src="js/db/pb.js"></script>
+	<script src="js/db/xl.js"></script>
+	<script>
+		$(function() {
+			//mui.toast($(document).width())
+			var action = window.localStorage.tab_action;
+			var userData;
+			if (action == undefined) {
+				window.localStorage.tab_action = "#tabbar";
+				action = window.localStorage.tab_action;
+			}
+			$('nav a').each(function() {
+				if ($(this).attr('href') == action) {
+					$(this).addClass('mui-active')
+				} else {
+					$(this).removeClass('mui-active')
+				}
+			})
+			$('div.mui-content div.mui-control-content').each(function() {
+				$(this).removeClass('mui-active')
+			})
+			$(action).addClass('mui-active')
+
+			$.getJSON("userData/txl.json", function(data) {
+				userData = data;
+				var orgs = userData.orgList.filter(function(e) {
+					return e.PARENTID == 'A90AEAEC-E3D4-43DE-BB67-85407B57B171' && e.DISPLAYNAME != "";
+				});
+				$.each(orgs, function(index, item) {
+					var li = $("<li class='mui-table-view-cell'></li>");
+					var a = $("<a class='mui-navigate-right'></a>");
+					var _span = $(
+						"<span style='font-size: 22px;color: #0F77BD;' class='mui-icon-extra mui-icon-extra-hotel'></span>");
+					a.append(_span)
+					a.append(" " + item.DISPLAYNAME)
+					a.appendTo(li)
+					li.appendTo($('#contact ul:eq(1)'))
+					li.bind("tap", function() {
+						window.localStorage.contact_deptId = item.DEPTID;
+						location.href = 'secondPage/org.html';
+						return false;
+					})
+				})
+			})
+			$('nav a').on('tap', function(e) {
+				window.localStorage.tab_action = $(this).attr('href');
+				$('nav a').each(function() {
+					$(this).removeClass('mui-active')
+				})
+				$('div.mui-content div.mui-control-content').each(function() {
+					$(this).removeClass('mui-active')
+				})
+				$($(this).attr('href')).addClass('mui-active')
+				$(this).addClass('mui-active')
+				return false;
+			})
+
+			$('body').delegate('span.mui-icon.mui-icon-clear', 'tap', function() {
+				$('#contact ul:eq(0)').empty();
+				$('#contact ul:eq(1)').show();
+				$('input[type=search]').val('');
+				$('input[type=search]').blur();
+				return false;
+			})
+			$('input[type=search]').on('input', function() {
+				var key = $(this).val()
+				$('#contact ul:eq(0)').empty();
+				if (key == "") {
+					$('#contact ul:eq(1)').show();
+					return;
+				} else {
+					$('#contact ul:eq(1)').hide();
+				}
+				var users = userData.userList.filter(function(e) {
+					return e.USERNAME.indexOf(key) >= 0 || e.USERDISPLAYNAME.indexOf(key) >= 0 || e.MOBILE.indexOf(key) >= 0 ||
+						e.MOBILEIPHONE.indexOf(key) >= 0 || e.TELEPHONE.indexOf(key) >= 0;
+				});
+				var size = users.length;
+				if (users.length > 100)
+					size = 100;
+				for (var i = 0; i < size; i++) {
+					var li = $("<li class='mui-table-view-cell'></li>");
+					var a = $("<a class='mui-navigate-right'></a>");
+					var _span = $("<span style='font-size: 22px;color: #0F77BD;' class='mui-icon mui-icon-person'></span>");
+					a.append(_span)
+					a.append(" " + users[i].USERDISPLAYNAME)
+					li.attr('data-userid', users[i].USERID)
+					li.attr('data-username', users[i].USERNAME)
+					a.appendTo(li)
+					li.appendTo($('#contact ul:eq(0)'))
+					li.bind("tap", function() {
+						window.localStorage.contact_userId = $(this).attr('data-userid');
+						location.href = 'secondPage/user.html';
+						return false;
+					})
+				}
+				$('#contact ul:eq(0) li').each(function() {
+					var _userid = $(this).attr('data-userid');
+					var daptids = userData.user_orgList.filter(function(e) {
+						return e.USER_RID == _userid;
+					});
+					var depts = userData.orgList.filter(function(e) {
+						return e.DEPTID == daptids[0].ORG_RID;
+					});
+					$(this).find('a').append(" <font size='2' color='#777777'>" + depts[0].DISPLAYNAME + "</font>")
+				})
+
+			})
+
+			//绑定注销
+			$("#logOut").on('tap', function() {
+				localStorage.clear();
+				logOutFunction(loginName)
+				return false;
+			})
+
+			var user = JSON.parse(getUserName(loginName))
+			
+
+			//年终大会
+			/*			$.getJSON(nzMeetingUrl+'/mvc/meeting/isMeeting/'+ loginName, function(data) { 
+						console.log(data) 
+							if(data.isOpen=="1"&&data.isMeeting=="1"){ 
+								$('#topImg').attr('src',data.dahuipic1) 
+								$('#topImg').on('click',function(){ 
+									var url = nzMeetingUrl+'/mvc/meeting/meetingIndex/'+ loginName; 
+									console.log(url)
+									openWebViewFunction(url,"2020年工作会议") 
+								}) 
+							}
+						})*/
+
+			//年终述职点击事件
+			/*			$('#topImg').on('click', function() {
+							//用友-人力年终述职访问权限
+							$.ajax({
+								url: 'http://moa.cispdr.com:8066/annualindex/authority/annualreport?psndoc_code=' + user.JOBNUMBER,
+								timeout: 3000,
+								dataType: 'json',
+								success: function(data) {
+									console.log(data)
+									if(data.isAssessor == 1) {
+										var url = 'http://moa.cispdr.com:8066/annualindex?psndoc_code=' + user.JOBNUMBER;
+										openWebViewFunction(url, "人力部年终述职")
+									} else {
+										mui.alert("您无访问权限！")
+									}
+								},
+								error: function(e) {
+									mui.toast(e.statusText)
+								}
+
+							});
+						})*/
+			//疫情应急管理平台点击事件
+			$('#topImg').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/", "疫情应急管理平台",
+					"http://moa.cispdr.com:8066/fy-mobile/#/")
+			})
+			$('#xctb').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/", "疫情应急管理平台",
+					"http://moa.cispdr.com:8066/fy-mobile/#/")
+			})
+
+		})
+
+		//获取登录名
+		function getUserName(u) {
+			localStorage.setItem('loginName', u);
+			$.getJSON("userData/txl.json", async = false,
+				function(data) {
+					var user = data.userList.filter(function(e) {
+						return e.USERNAME == u;
+					});
+					localStorage.setItem('uo', JSON.stringify(user[0]));
+
+					initUser(JSON.parse(localStorage.getItem('uo')))
+					//初始化登陆用户数据--结束
+
+				})
+			return localStorage.getItem('uo');
+		}
+
+		function initUser(u) {
+			$('#currentUserDisplayName').html(u.USERDISPLAYNAME)
+			$('#currentUserJobNumber').html(u.JOBNUMBER)
+			callReflashDBCount()
+
+			//绑定院签报点击事件
+			$('#yqb').on('click', function() {
+				var url = appUrl + '/CEGWAPServer/YQB/New/myTransact/' + u.USERNAME;
+				openWebViewFunction(url, "院签报")
+			})
+			//绑定出差点击事件
+			$('#outweb').on('click', function() {
+				var url = appUrl + '/OutWeb/wapgTasks/' + u.USERID;
+				openWebViewFunction(url, "出差审批")
+			})
+			//印章管理点击事件
+			$('#yz').on('click', function() {
+				var url = appUrl + '/CEGWAPServer/GWManage/yz/transact/' + u.USERNAME;
+				openWebViewFunction(url, "印章管理")
+			})
+			//订会议室点击事件
+			$('#dhys').on('click', function() {
+				var url = appUrl + '/CEGWAPServer/HYManage/getIndex_HY/' + u.USERNAME;
+				openWebViewFunction(url, "订会议室", "/CEGWAPServer/HYManage/getMeeting/")
+			})
+			//低值易耗品点击事件
+			$('#dzyhp').on('click', function() {
+				var url = 'http://moa.cispdr.com:8066/cjwsjy-yhp/txmbWjglSwglAppAction.do?goTXmbWjglSwglAppTab&uuid=' + u.USERNAME;
+				openWebViewFunction(url, "低值易耗品")
+			})
+			//疫情防控
+			$('#yqfk').on('click', function() {
+				openDWebViewFunction('http://moa.cispdr.com:8066/epidemic_prevention_mobile/', "疫情防控",
+					'http://moa.cispdr.com:8066/epidemic_prevention_mobile/#/')
+			})
+			//我的投票
+			$('#wdtp').on('click', function() {
+				openDWebViewFunction('http://moa.cispdr.com:8087/toupiao.html?uid=' + u.USERID, "人力-我的投票",
+					'http://moa.cispdr.com:8066/toupiao.html?uid=' + u.USERID)
+			})
+			//薪资查询点击事件
+			$('#xzcx').on('click', function() {
+				var url = xzcxUrl + '/mvc/sms_verification/' + u.JOBNUMBER;
+				openWebViewFunction(url, "薪资查询")
+			})
+			$('#rl_xzcx').on('click', function() {
+				var url = xzcxUrl + '/mvc/sms_verification/' + u.JOBNUMBER;
+				openWebViewFunction(url, "薪资查询")
+			})
+			//服务电话点击事件
+			$('#fwdh').on('click', function() {
+				var url = appUrl + '/CEGWAPServer/bianjiefuwu/' + u.JOBNUMBER;
+				openWebViewFunction(url, "服务电话")
+			})
+			//新闻中心点击事件
+			$('#xwzx').on('click', function() {
+				location.href = "newsCenter.html"
+			})
+			//餐饮服务点击事件
+			$('#mess').on('click', function() {
+				callCYFWFunction()
+			})
+			//规程规范点击事件
+			$('#gcgf').on('click', function() {
+				callGCGFFunction()
+			})
+			//资产扫码点击事件
+			$('#zcsm').on('click', function() {
+				callZCSMFunction()
+			})
+			//知识管理
+			$('#zsgl').on('click', function() {
+				var openUrl = appZSGLUrl + '/sso_from_oa.do?method=mLogin&redirectTo=&encryptUserId=';
+				var closeUrl = appZSGLUrl + '/third/pda/login.jsp ' +
+					appZSGLUrl +
+					'/sys/mportal/sys_mportal_page/sysMportalPage.do?method=view&fdId=16a6ce486f3b785649634384e46a17e6&fdName=%E6%9C%80%E6%96%B0%E7%9F%A5%E8%AF%86 ' +
+					appZSGLUrl +
+					'/sys/mportal/sys_mportal_page/sysMportalPage.do?method=view&fdId=16a6ce486f3b785649634384e46a17e6&fdName=%25E6%259C%2580%25E6%2596%25B0%25E7%259F%25A5%25E8%25AF%2586 ' +
+					appZSGLUrl +
+					'/sys/mportal/sys_mportal_page/sysMportalPage.do?method=view&fdId=16a6ce51479a7ee242699e844068aace&fdName=%25E6%259C%2580%25E7%2583%25AD%25E7%259F%25A5%25E8%25AF%2586 ' +
+					appZSGLUrl +
+					'/sys/mportal/sys_mportal_page/sysMportalPage.do?method=view&fdId=16a6ce56b5de769dd69cc2c4fb4b8080&fdName=%25E7%25AD%2594%25E7%2596%2591%25E8%25A7%25A3%25E6%2583%2591 ' +
+					appZSGLUrl +
+					'/sys/mportal/sys_mportal_page/sysMportalPage.do?method=view&fdId=16a6ce60a947eadd63360544597a055c&fdName=%25E4%25B8%25AA%25E4%25BA%25BA%25E4%25BA%258B%25E9%25A1%25B9';
+				callZSGLFunction(openUrl, '知识管理', closeUrl)
+			})
+			//重点项目跟踪
+			$('#zdxmgz').on('click', function() {
+				openDWebViewFunction(zdxmgzUrl, "重点项目跟踪", zdxmgzUrl + "#/")
+			})
+			//发票抬头点击事件
+			$('#fptt').on('click', function() {
+				var url = appUrl + '/CEGWAPServer/InvoiceController/getAll/' + u.USERID;
+				openWebViewFunction(url, "发票抬头")
+			})
+			//车辆管理点击事件
+			$('#clgl').on('click', function() {
+				callCLGLFunction()
+			})
+			//版本更新点击事件
+			$('#appUpdate').on('click', function() {
+				callCheckVersionFunction()
+			})
+			//名片管理
+			$('#bussinessCard').on('click', function() {
+				openDWebViewFunction(businessCardUrl, "名片管理", businessCardUrl + "#/")
+			})
+			//工作绩效
+			$('#gzjx').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/gzjx/", "人力资源-工作绩效管理平台",
+					"http://moa.cispdr.com:8066/fy-mobile/gzjx/#/")
+			})
+			//请假申请
+			$('#qjsq').on('click', function() {
+				callQJSQfunction()
+			})
+			//出入管理
+			$('#jkm').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/#/SweepCode", "人力资源-工作绩效管理平台-出入管理",
+					"http://moa.cispdr.com:8066/fy-mobile/#/MyCode")
+			})
+			//核酸检测
+			$('#hsjc').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8066/virus_detection/", "人力资源-工作绩效管理平台-核酸检测",
+					"http://moa.cispdr.com:8066/virus_detection/")
+			})
+			//投票
+			$('#tp').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8087/toupiao.html?uid=" + u.USERID, "人力资源-投票",
+					"http://moa.cispdr.com:8087/toupiao.html?uid=" + u.USERID)
+			})
+			//人才查询点击事件
+			$('#rl_rccx').on('click', function() {
+				var data = {};
+				data.userName = u.USERNAME;
+				//人才检索访问权限
+				$.ajax({
+					url: rcjsUrl + 'rest/checkPremission',
+					data: data,
+					timeout: 3000,
+					contentType: 'application/json',
+					dataType: 'json',
+					success: function(data) {
+						if (data.data.count == 1) {
+							openDWebViewFunction(rcjsUrl, "人力资源-人才查询", rcjsUrl + "#/")
+						} else {
+							mui.alert("您无访问权限！")
+						}
+					},
+					error: function(e) {
+						mui.toast(e.statusText)
+					}
+
+				});
+			})
+		}
+
+		//给手机调用的方法，登陆后把传入版本信息
+		function setCurrentVersion(version, hotversion) {
+			$('#currentVersion').html("APP移动办公应用" + version + "." + hotversion + "，谢谢关注！")
+		}
+		//给手机调用的方法，刷新待办数
+		function callReflashDBCount() {
+			$('.mui-badge2').remove();
+			var u = JSON.parse(localStorage.getItem('uo'))
+			//取待总的待办
+			var dburl = appUrl + '/CEGWAPServer/RecordTotal/getMyTaskTotal3678/' + u.USERNAME + '/' + u.JOBNUMBER + '/' + u.USERID
+			$.getJSON(dburl, function(data) {
+				
+				var v = 0;
+				$.each(data, function(key, value) {
+					v=v+parseInt(value);;
+				})
+				
+				$.each(data, function(key, value) {
+					if ($('#' + key).length > 0 && value > 0) {
+						var _span = $("<span class='mui-badge2'>")
+						_span.html(value)
+						if (key != "总数") {
+							if (value.length == 3) {
+								_span.css("margin-left", "-35px")
+							}
+							if (value.length == 4) {
+								_span.css("margin-left", "-40px")
+							}
+							if ($('#' + key).find('span').length != 0) {
+								var total = parseInt($('#' + key).find('span').html());
+								total += parseInt(value);
+								$('#' + key).find('span').html(total)
+							} else {
+								$('#' + key).append(_span)
+							}
+						}
+					}
+				})
+				
+				if($('#总数').find('span').length == 0) {
+					var _spanTotal = _span.clone()
+					$('#总数').append(_spanTotal)
+				} else {
+					var total = parseInt($('#总数').find('span').html());
+					total += parseInt(v);
+					$('#总数').find('span').html(total)
+				}
+			})
+			//重点项目跟踪待办
+			var gluid = u.USERID.replace(new RegExp("-", "gm"), "");
+			$.getJSON(zdxmgzDBUrl + gluid, function(data) {
+				var value = data.body;
+				if (value > 0) {
+					var _span = $("<span class='mui-badge2'>")
+					_span.html(value)
+					if (value.length == 3) {
+						_span.css("margin-left", "-35px")
+					}
+					if (value.length == 4) {
+						_span.css("margin-left", "-40px")
+					}
+					$('#项目跟进').append(_span)
+
+					if ($('#总数').find('span').length == 0) {
+						var _spanTotal = _span.clone()
+						$('#总数').append(_spanTotal)
+					} else {
+						var total = parseInt($('#总数').find('span').html());
+						total += parseInt(value);
+						$('#总数').find('span').html(total)
+					}
+				}
+			})
+			setBadge(u.USERNAME,u.USERID)
+			//潘博项目管理待办
+			xmgl(u.USERID)
+			//李琦彪档案管理待办
+			dagl(u.USERID)
+			//李文迪项目收发文待办
+			xmsfw(u.USERNAME)
+			//宋诗文低值易耗品待办
+			dzyhp(u.USERNAME, u.USERID)
+			//陈朋出国管理、人力资源
+			cggl(u.USERNAME)
+			rlzy(u.USERNAME, u.USERID)
+
+			//为APP桌面设置小红点待办条数
+			setTimeout(function() {
+				var zs = $('#总数').find('span').html()
+				if (zs) {
+					try {
+						setBadgeNumFunction(zs);
+					} catch (e) {
+						//TODO handle the exception
+						console.log("设置桌面角标")
+					}
+				} else {
+					setBadgeNumFunction("0");
+				}
+			}, 5000)
+		}
+
+		//首页顶部轮播图效果
+		var slider = mui("#slider");
+		slider.slider({
+			interval: 3000
+		});
+	</script>
+
+</html>

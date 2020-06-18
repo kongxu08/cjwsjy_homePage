@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>部门</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../css/nav.css" />
+		<style>
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;"></h1>
+		</header>
+		<div class="mui-content" id="tabbar-with-contact">
+			<ul class="mui-table-view"></ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+<script>
+	$(function() {
+		var token = Math.random() + "";
+		token = token.substring(3);
+		var parentId = window.localStorage.contact_deptId;
+		//var parentId = getUrlParms("deptId");
+		var backParentId = "";
+
+		$.getJSON("../userData/txl.json", function(data) {
+			var parentOrg = data.orgList.filter(function(e) {
+				return e.DEPTID == parentId;
+			});
+			$("#head_title").html(parentOrg[0].DISPLAYNAME)
+			//回退上一级用父机构ID
+			backParentId = parentOrg[0].PARENTID;
+			var orgs = data.orgList.filter(function(e) {
+				return e.PARENTID == parentId;
+			});
+			$.each(orgs, function(index, item) {
+				var li = $("<li class='mui-table-view-cell'></li>");
+				var a = $("<a class='mui-navigate-right'></a>");
+				var _span = $("<span style='font-size: 22px;color: #0F77BD;' class='mui-icon-extra mui-icon-extra-hotel'></span>");
+				a.append(_span)
+				a.append(" "+item.DISPLAYNAME)
+				a.appendTo(li)
+				li.appendTo($('#tabbar-with-contact ul'))
+				li.bind("tap", function() {
+					window.localStorage.contact_deptId = item.DEPTID;
+					location.href = 'org.html';
+					return false;
+					//location.href = 'org.html?deptId=' + item.DEPTID;
+				})
+			})
+			var userOrgs = data.user_orgList.filter(function(e) {
+				return e.ORG_RID == parentId;
+			});
+
+			userOrgs.sort(up)
+
+			$.each(userOrgs, function(index, item) {
+				var users = data.userList.filter(function(e) {
+					return item.USER_RID == e.USERID;
+				});
+				$.each(users, function(index2, item2) {
+					var li = $("<li class='mui-table-view-cell'></li>");
+					var a = $("<a class='mui-navigate-right'></a>");
+					var _span = $("<span style='font-size: 22px;color: #0F77BD;' class='mui-icon mui-icon-person'></span>");
+					a.append(_span)
+					a.append(" "+item2.USERDISPLAYNAME)
+					a.appendTo(li)
+					li.appendTo($('#tabbar-with-contact ul'))
+					li.bind("click", function() {
+						window.localStorage.contact_userId = item.USER_RID;
+						location.href = 'user.html';
+						//location.href = 'user.html?userId=' + item.USER_RID;
+					})
+				})
+			})
+		})
+		$('.mui-action-back').bind('click', function() {
+			if(backParentId != 'A90AEAEC-E3D4-43DE-BB67-85407B57B171') {
+				console.log(backParentId)
+				window.localStorage.contact_deptId = backParentId;
+				location.href = 'org.html';
+				//location.href = 'org.html?token=' + token + '&deptId=' + backParentId;
+			} else {
+				window.localStorage.tab_action = '#contact';
+				location.href = '../index2.html';
+				//location.href = 'index2.html?token=' + token + '&action=contact';
+			}
+		})
+	})
+	//按升序排列
+	function up(x, y) {
+		return x.USERSORT - y.USERSORT
+	}
+</script>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>新闻搜索</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/mui.css" />
+		<link rel="stylesheet" type="text/css" href="css/nav.css" />
+		<style type="text/css">
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+				z-index: -1;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				position: relative;
+				display: block;
+				overflow: hidden;
+				margin: -11px -15px;
+				padding: inherit;
+				white-space: normal;
+				text-overflow: ellipsis;
+				font-size: 15px;
+				color: inherit;
+			}
+			
+			.mui-slider-indicator {
+				position: absolute;
+				bottom: 38px;
+				width: 100%;
+				text-align: center;
+				background: 0 0;
+			}
+			
+			span {
+				font-size: 14px;
+				margin-top: 5px;
+				margin-bottom: 0px;
+				color: #8f8f94
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">新闻搜索</h1>
+		</header>
+		<div class="mui-content mui-spinner-white">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>新闻标题</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="0">
+					<span class="mui-icon mui-icon-clear mui-hidden"></span>
+				</div>
+				<div class="mui-input-row">
+					<label>作者</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="1">
+					<span class="mui-icon mui-icon-clear mui-hidden"></span>
+				</div>
+				<div class="mui-input-row">
+					<label>发布部门</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入" data-input-clear="2">
+					<span class="mui-icon mui-icon-clear mui-hidden"></span>
+				</div>
+				<div class="mui-button-row">
+					<button class="mui-btn mui-btn-primary" data-loading-text="提交中" type="button" style="width: 80%;" onclick="return false;">搜索</button>
+				</div>
+			</form>
+		</div>
+		<div class="mui-scroll-wrapper mui-hidden" style="top: 44px;">
+			<div class="mui-scroll">
+				<ul class="mui-table-view" data-page="1">
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/mui.js"></script>
+	<script src="js/mui.pullToRefresh.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+		$(function() {
+			//打开新闻中心
+			$('header a.mui-action-back').on('tap', function() {
+				window.location.href = 'newsCenter.html';
+			})
+			mui.init()
+
+			$('button.mui-btn').on('tap', function() {
+				var title = $('input[type=text]:eq(0)').val()
+				var author = $('input[type=text]:eq(1)').val()
+				var deptname = $('input[type=text]:eq(2)').val()
+				if(title.length < 1 && author.length < 1 && deptname.length < 1) {
+					mui.toast('请输入搜索条件', {
+						duration: 'long',
+						type: 'div'
+					})
+					return false;
+				}
+				mui(this).button('loading');
+				var params = {};
+				params.title = title;
+				params.author = author;
+				params.deptname = deptname;
+				params.page = 1;
+				var hasFinish = false;
+				var _this=this;
+
+				(function(m) {
+					//阻尼系数
+					var deceleration = mui.os.ios?0.003:0.0009;
+					m('.mui-scroll-wrapper').scroll({
+						bounce: false,
+						indicators: true, //是否显示滚动条
+						deceleration:deceleration
+					});
+					m.ready(function() {
+						//循环初始化所有下拉刷新，上拉加载。
+						m.each(document.querySelectorAll('div.mui-scroll'), function(index, pullRefreshEl) {
+							m(pullRefreshEl).pullToRefresh({
+								up: {
+									callback: function() {
+										var self = this;
+										setTimeout(function() {
+											var ul = self.element.querySelector('.mui-table-view');
+
+											if(hasFinish) {
+												self.finished = true;
+												self.pullUpTipsIcon.innerHTML = self.options.up.contentnomore;
+												self.element.removeEventListener('dragup', self);
+												window.removeEventListener('scroll', self);
+											} else {
+												createFragment(ul);
+												self.pullUpTipsIcon.innerHTML = self.options.up.contentdown;
+											}
+											if(self.isInScroll) {
+												m(self.element.parentNode).scroll().refresh();
+											}
+											self.loading = false;
+
+										}, 1000);
+									}
+								}
+							});
+						});
+						var createFragment = function(ul) {
+							var length = ul.querySelectorAll('li').length;
+							var fragment = document.createDocumentFragment();
+							var li = [];
+							var page = parseInt($(ul).attr('data-page'));
+							var title = $('input[type=text]:eq(0)').val()
+							var author = $('input[type=text]:eq(1)').val()
+							var deptname = $('input[type=text]:eq(2)').val()
+							var params = {};
+							params.title = title;
+							params.author = author;
+							params.deptname = deptname;
+							page = page + 1;
+							params.page = page;
+							$.getJSON(appUrl+'/CEGWAPServer/XW/GetIPSList_Search2', params, function(data) {
+								if(data.length<20){
+									hasFinish=true;
+								}
+								$(data).each(function(index, item) {
+									var _li = $("<li class='mui-table-view-cell'></li>")
+									var _a = $("<a class='mui-navigate-right' href='javascript:void()'>")
+									var _div = $('<div style>')
+									var span = $("<span>")
+									var span2 = $("<span style='float:right;margin-right:20px;'>")
+									_a.html(item.Title)
+									_a.attr("data-value", item.InfoGuid)
+									_div.append(span)
+									_div.append(span2)
+									_a.append(_div)
+									span.text(item.GroupName)
+									span2.text(item.ShowTime)
+									_li.append(_a)
+									$(ul).append(_li)
+								})
+							})
+							$(ul).attr('data-page', page)
+						};
+					});
+				})(mui);
+
+				$.getJSON(appUrl+'/CEGWAPServer/XW/GetIPSList_Search2', params, function(data) {
+					if(data.length>0&&data.length<20){
+						hasFinish=true;
+					}
+					if(data.length > 0) {
+						$('div.mui-content').addClass('mui-hidden')
+						$('div.mui-scroll-wrapper').removeClass('mui-hidden')
+						$(data).each(function(index, item) {
+							var _li = $("<li class='mui-table-view-cell'></li>")
+							var _a = $("<a class='mui-navigate-right' href='javascript:void()'>")
+							var _div = $('<div style>')
+							var span = $("<span>")
+							var span2 = $("<span style='float:right;margin-right:20px;'>")
+							_a.html(item.Title)
+							_a.attr("data-value", item.InfoGuid)
+							_div.append(span)
+							_div.append(span2)
+							_a.append(_div)
+							span.text(item.GroupName)
+							span2.text(item.ShowTime)
+							_li.append(_a)
+							$('div.mui-scroll ul').append(_li)
+						})
+					}
+					else if(data.length==0){
+						mui.toast('未搜索到相关数据', {
+							duration: 'long',
+							type: 'div'
+						})
+						mui(_this).button('reset');
+					}
+
+				})
+				return false;
+			})
+			var u = localStorage.getItem('loginName');
+			//动态绑定事件
+			$('body').delegate('a.mui-navigate-right','click',function(){
+				var url = appUrl+'/CEGWAPServer/XW/GetIPSForm/'+u+'/'+$(this).attr('data-value')
+				openWebViewFunction(url)
+				return false;
+			})
+			//记日志
+			saveLogFunction("新闻搜索")
+		})
+		
+	</script>
+
+</html>

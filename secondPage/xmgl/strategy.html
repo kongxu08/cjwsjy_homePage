@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>战略管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/nav.css" />
+		<style>
+			li.mui-table-view-divider{font-size:12px;}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">战略管理</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">	
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_StrategicCooperationAgreement">
+						战略合作协议
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="T_InvestmentProject">
+						实业投资项目
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../../js/mui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-2.2.2.min.js"></script>
+<script src="../../js/app.js"></script>
+<script>
+	//gaopeng用户id
+	var uid = JSON.parse(localStorage.getItem("uo")).USERID;
+	var u = localStorage.getItem('loginName');
+
+	$(function() {
+		//战略合作协议
+		$('#T_StrategicCooperationAgreement').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/scjy/StrategicCooperationAgreement/myTransact/'+uid;
+			openWebViewFunction(url,"市场经营-战略合作协议")
+		})
+		//实业投资项目
+		$('#T_InvestmentProject').parent().on('click',function(){
+			var url = appUrl+'/CEGWAPServer/scjy/InvestmentProject/myTransact/'+uid;
+			openWebViewFunction(url,"市场经营-实业投资项目")
+		})
+		
+		callReflashDBCount()
+		
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount(){
+		$('span.mui-badge').remove();
+		//取待办
+		$.ajax({
+			url: "http://moa.cispdr.com:8087/dsp.gw/badge/db_count?type=strategy&userName="+u,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast("战略管理数字角标获取失败")
+			}
+
+		});
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if(e.persisted) {
+			location.reload();
+		}
+	});
+</script>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>网上报销</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/nav.css" />
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">网上报销</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="一般借款单">
+						一般借款单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="差旅费借款单">
+						差旅费借款单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="一般报销单">
+						一般报销单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="差旅费报销单">
+						差旅费报销单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="生产项目借款单">
+						生产项目借款单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="生产项目一般报销单">
+						生产项目一般报销单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="生产项目差旅费报销单">
+						生产项目差旅费报销单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="科研项目借款单">
+						科研项目借款单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="科研项目一般报销单">
+						科研项目一般报销单
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="科研项目差旅费报销单">
+						科研项目差旅费报销单
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+<script src="../js/app.js"></script>
+<script>
+	var uo = JSON.parse(localStorage.getItem('uo'))
+	//gaopeng用户编号
+	var uCode = JSON.parse(localStorage.getItem("uo")).JOBNUMBER;
+	$(function() {
+
+		//网上报销待办
+		var dburl = appUrl+'/CEGWAPServer/RecordTotal/getWebApproveList/' + uo.JOBNUMBER;
+		$.getJSON(dburl, function(data) {
+			$.each(data, function(index, item) {
+				if($('#' + item.title).length > 0 && item.count > 0) {
+					var _span = $('<span class="mui-badge mui-badge-danger">')
+					_span.html(item.count)
+					$('#' + item.title).append(_span)
+				}
+			})
+		})
+		
+		//gaopeng一般借款单
+		$('li.mui-table-view-cell:eq(0)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=2632';
+			openWebViewFunction(url,"网上报销-一般借款单")
+		})
+		//gaopeng差旅费借款单
+		$('li.mui-table-view-cell:eq(1)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=2631';
+			openWebViewFunction(url,"网上报销-差旅费借款单")
+		})
+		
+		
+		
+		$('li.mui-table-view-cell:eq(2)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=2646';
+			openWebViewFunction(url,"网上报销-一般报销单")
+		})
+		$('li.mui-table-view-cell:eq(3)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=2641';
+			openWebViewFunction(url,"网上报销-差旅费报销单")
+		})
+		$('li.mui-table-view-cell:eq(4)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=263X-SC';
+			openWebViewFunction(url,"网上报销-生产项目借款单")
+		})
+		$('li.mui-table-view-cell:eq(5)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=264X-SC01';
+			openWebViewFunction(url,"网上报销-生产项目一般报销单")
+		})
+		$('li.mui-table-view-cell:eq(6)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=264X-SC02';
+			openWebViewFunction(url,"网上报销-生产项目差旅费报销单")
+		})
+		$('li.mui-table-view-cell:eq(7)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=263X-KY';
+			openWebViewFunction(url,"网上报销-科研项目借款单")
+		})
+		$('li.mui-table-view-cell:eq(8)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=264X-KY01';
+			openWebViewFunction(url,"网上报销-科研项目一般报销单")
+		})
+		$('li.mui-table-view-cell:eq(9)').on('click',function(){
+			var url = appWSBXUrl+'/?usercode='+ uCode +'&billtype=264X-KY02';
+			openWebViewFunction(url,"网上报销-科研项目差旅费报销单")
+		})
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount(){
+		//取待办
+		$.getJSON(dburl, function(data) {
+			console.log(data)
+			$('span.mui-badge').remove();
+			$.each(data, function(index, item) {
+				if($('#' + item.title).length > 0 && item.count > 0) {
+					var _span = $('<span class="mui-badge mui-badge-danger">')
+					_span.html(item.count)
+					$('#' + item.title).append(_span)
+				}
+			})
+		})
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if(e.persisted) {
+			location.reload();
+		}
+	});
+</script>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>监理项目管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/nav.css" />
+		<style>
+			li.mui-table-view-divider{font-size:12px;}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar2 mui-bar-nav2">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:void(0)" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" id="head_title" style="color: #FFFFFF;">监理项目管理</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">	
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="jl-xmxxdj">
+						 项目信息登记
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="jl-xmdjpd">
+						 项目等级评定
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="jl-xmjlrm">
+						项目经理任命
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="jl-xmbzj">
+						 项目部组建
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="jl-xmjlbg">
+						 项目经理变更
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="jl-xmbbg">
+						 项目部变更
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../../js/mui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-2.2.2.min.js"></script>
+<script src="../../js/app.js"></script>
+<script>
+	//gaopeng用户id
+	var uid = JSON.parse(localStorage.getItem("uo")).USERID;
+	var u = localStorage.getItem('loginName');
+	//项目管理待办
+	var dburl = appUrl+'/CEGWAPServer/RecordTotal/getMyTaskTotal_XM3/' + u;
+	//刘广文项目管理待办
+	var lgwDBUrl = xmglUrl+'/ui/count/GetFlowCount.ashx?action=getcount&userId='+uid;
+	$(function() {
+		
+		//监理-项目信息登记
+		$('#jl-xmxxdj').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=2&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目信息登记")
+		})
+		//监理-项目等级评定
+		$('#jl-xmdjpd').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=3&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目等级评定")
+		})
+		//监理-项目经理任命
+		$('#jl-xmjlrm').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=5&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目经理任命")
+		})
+		//监理-项目部组建
+		$('#jl-xmbzj').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=7&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目部组建")
+		})
+		//监理-项目经理变更
+		$('#jl-xmjlbg').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=10&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目经理变更")
+		})
+		//监理-项目部变更
+		$('#jl-xmbbg').parent().on('click',function(){
+			var url = xmglUrl+'/ui/main/workflow.aspx?mk=12&userId='+uid;
+			openWebViewFunction(url,"项目管理-监理-项目部变更")
+		})
+
+		callReflashDBCount()
+		
+	})
+	//给手机调用的方法，刷新待办数
+	function callReflashDBCount(){
+		$('span.mui-badge').remove();
+		//刘广文项目管理待办
+		$.ajax({
+			url: lgwDBUrl,
+			timeout: 3000,
+			dataType: 'json',
+			success: function(data) {
+				$.each(data, function(key, value) {
+					if($('#' + key).length > 0 && value > 0) {
+						var _span = $('<span class="mui-badge mui-badge-danger">')
+						_span.html(value)
+						$('#' + key).append(_span)
+					}
+				})
+			},
+			error: function(e) {
+				mui.toast("监理项目数字角标获取失败")
+			}
+
+		});
+	}
+	window.addEventListener('pageshow', function(e) {
+		// 通过persisted属性判断是否存在 BF Cache
+		if(e.persisted) {
+			location.reload();
+		}
+	});
+</script>
+
