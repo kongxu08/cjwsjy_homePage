@@ -821,8 +821,7 @@
 						}
 					}
 				})
-				
-				if($('#总数').find('span').length == 0) {
+				if($('#总数').find('span').length == 0 && v!=0) {
 					var _span = $("<span class='mui-badge2'>")
 					_span.html(parseInt(v))
 					$('#总数').append(_span)
