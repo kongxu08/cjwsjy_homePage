@@ -84,27 +84,27 @@
 				<li class="mui-table-view-divider">督办管理</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="TZhbDbsxYwb">
-						申请(测试)
+						申请
 						</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="TZhbDbsxBglcb">
-						变更(测试)
+						变更
 					</a>
 				</li>		
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="TZhbDbsxZzlcb">
-						终止(测试)
+						终止
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="TZhbDbsxBjlcb">
-						办结(测试)
+						办结
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="TZhbDbsxCS">
-						抄送列表(测试)
+						抄送列表
 					</a>
 				</li>																
 			</ul>
@@ -236,6 +236,7 @@
 			timeout: 3000,
 			dataType: 'json',
 			success: function(data) {
+				console.log('http://moa.cispdr.com:8066/DBWAPServer/dbsx/DB_Totel_All/'+uid)
 				console.log(data)
 				$.each(data, function(key, value) {
 					if($('#' + key).length > 0 && parseInt(value) > 0) {
@@ -252,9 +253,9 @@
 		});
 		
 		//宋诗文党群部承诺书
-		uid=uid.replace(new RegExp("-","gm"),"");
+		userId=uid.replace(new RegExp("-","gm"),"");
 		$.ajax({
-			url: 'http://moa.cispdr.com:8066/yh/a/formApi/getzrsSunById?userId='+uid,
+			url: 'http://moa.cispdr.com:8066/yh/a/formApi/getzrsSunById?userId='+userId,
 			timeout: 3000,
 			dataType: 'json',
 			success: function(data) {

@@ -84,6 +84,13 @@
 							<div style="margin-top: 0px;" class="mui-media-body2">岗级调整</div>
 						</a>
 					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="background: #FFFFFF;">
+						<a href="###">
+							<span class="mui-icon2" id="p_assessmentresultsapprovalform"><img src="../images/rssp/khjggj.png" width="64px" /></span>
+							<div class="mui-media-body2" style="margin-top: -12px;">根据考核结</div>
+							<div style="margin-top: 0px;" class="mui-media-body2">果调整岗级</div>
+						</a>
+					</li>					
 				</ul>
 		</div>
 	</body>
@@ -126,6 +133,11 @@
 		$('#p_eachunitemployeelevelapprovalform').on('click', function() {
 			var url = 'http://moa.cispdr.com:8066/huiguo/p_eachunitemployeelevelapprovalform/index.html#/';
 			openDWebViewFunction(url, "人力资源-各单位班子成员岗级调整审批表")
+		})
+		//根据考核结果调整岗级审批表
+		$('#p_assessmentresultsapprovalform').on('click', function() {
+			var url = 'http://moa.cispdr.com:8066/huiguo/p_assessmentresultsapprovalform/index.html#/';
+			openDWebViewFunction(url, "人力资源-根据考核结果调整岗级审批表")
 		})
 		callReflashDBCount()
 		//年终述职点击事件

@@ -42,6 +42,17 @@
 				margin-top: 0px;
 				width: 50px !important;
 			} 
+			.mui-table-view:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 0;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
 		</style>
 	</head>
 
@@ -118,16 +129,22 @@
 							<div class="mui-media-body2">院签报</div>
 						</a>
 					</li>
-					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="yz" style="border:none;">
-						<a href="###">
-							<span class="mui-icon2" id="印章待办"><img src="images/moudle/btn_home_new_stump@2x.png" width="64px" /></span>
-							<div class="mui-media-body2">印章管理</div>
-						</a>
-					</li>
 					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="outweb" style="border:none;">
 						<a href="###">
 							<span class="mui-icon2" id="出差审批待办"><img src="images/moudle/btn_home_new_out@2x.png" width="64px" /></span>
 							<div class="mui-media-body2">出差审批</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="leave" style="border:none;">
+						<a href="###">
+							<span class="mui-icon2" id="请假审批"><img src="images/moudle/leave.png" width="64px" /></span>
+							<div class="mui-media-body2">请假(测试)</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" id="yz" style="border:none;margin-top: -10px;">
+						<a href="###">
+							<span class="mui-icon2" id="印章待办"><img src="images/moudle/btn_home_new_stump@2x.png" width="64px" /></span>
+							<div class="mui-media-body2">印章管理</div>
 						</a>
 					</li>
 					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
@@ -143,15 +160,9 @@
 						</a>
 					</li>
 					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
-						<a href="###">
-							<span class="mui-icon2" id="wdtp"><img src="images/moudle/btn_home_tp.png" width="64px" /></span>
-							<div class="mui-media-body2">我的投票</div>
-						</a>
-					</li>
-					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="border:none;margin-top: -10px;">
 						<a href="secondPage/hygl.html">
 							<span class="mui-icon2" id="会议管理待办"><img src="images/moudle/btn_home_new_meet@2x.png" width="64px" /></span>
-							<div class="mui-media-body2">会议管理</div>
+							<div class="mui-media-body2">会议申报</div>
 						</a>
 					</li>
 				</ul>
@@ -274,14 +285,7 @@
 				<div class="title_box">
 					<img src="images/moudle/btn_home_title_rlzy.png" width="43px" style="vertical-align: middle;" /> 人力资源
 				</div>
-				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;">
-					<!-- <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-						<a href="secondPage/rlzy.html">
-							<span class="mui-icon2" id="人力资源待办"><img src="images/moudle/btn_home_hr.png" width="64px" /></span>
-							<div class="mui-media-body2">人力资源</div>
-						</a>
-					</li>	 -->
-
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;border-bottom:4px solid #efeff4;">
 					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
 						<a href="secondPage/rlzy.html">
 							<span class="mui-icon2" id="人力资源待办"><img src="images/moudle/btn_home_rssp.png" width="64px" /></span>
@@ -305,6 +309,20 @@
 						<a href="###">
 							<span class="mui-icon2" id="gzjx"><img src="images/moudle/btn_home_new_jxpt.png" width="64px" /></span>
 							<div class="mui-media-body2">绩效管理</div>
+						</a>
+					</li>
+				</ul>
+				
+				
+				<!-- 其它 -->
+				<div class="title_box">
+					<img src="images/moudle/more.png" width="43px" style="vertical-align: middle;" /> 其它
+				</div>
+				<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;border-bottom:4px solid #efeff4;">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+						<a href="###">
+							<span class="mui-icon2" id="wdtp"><img src="images/moudle/btn_home_tp.png" width="64px" /></span>
+							<div class="mui-media-body2">我的投票</div>
 						</a>
 					</li>
 				</ul>
@@ -630,7 +648,10 @@
 			$('#currentUserDisplayName').html(u.USERDISPLAYNAME)
 			$('#currentUserJobNumber').html(u.JOBNUMBER)
 			callReflashDBCount()
-
+			//请假审批点击事件
+			$('#leave').on('click', function() {
+				mui.alert("建设中")
+			})
 			//绑定院签报点击事件
 			$('#yqb').on('click', function() {
 				var url = appUrl + '/CEGWAPServer/YQB/New/myTransact/' + u.USERNAME;
