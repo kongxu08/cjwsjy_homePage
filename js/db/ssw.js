@@ -179,7 +179,7 @@ function dzyhp(userName,userId){
 				}
 			},
 			error: function(e) {
-				mui.toast(e.statusText)
+				mui.toast("党群应用数字角标获取失败")
 			}
 		
 		});

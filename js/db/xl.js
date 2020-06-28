@@ -150,4 +150,42 @@ function setBadge(userName,uid) {
 			mui.toast("投票数字角标获取失败")
 		}
 	});
+	
+		$.ajax({
+		url: "http://moa.cispdr.com:8088/CEGWAPServer/leave/db_count?userName="+userName,
+		type:"post",
+		timeout: 3000,
+		dataType:"json",
+		success: function(d) {
+			var v = d.data.leave;
+			if(v > 0) {
+				var _span = $("<span class='mui-badge2'>")
+				_span.html(v)
+				if(v.length == 3) {
+					_span.css("margin-left", "-35px")
+				}
+				if(v.length == 4) {
+					_span.css("margin-left", "-40px")
+				}
+				if($('#请假审批').find('span').length != 0) {
+					var total = parseInt($('#wdtp').find('span').html());
+					total += v;
+					$('#请假审批').find('span').html(total)
+				} else {
+					$('#请假审批').append(_span)
+				}
+				if($('#总数').find('span').length == 0) {
+					var _spanTotal = _span.clone()
+					$('#总数').append(_spanTotal)
+				} else {
+					var total = parseInt($('#总数').find('span').html());
+					total += parseInt(v);
+					$('#总数').find('span').html(total)
+				}
+			}
+		},
+		error(xhr, textStatus, e){
+			mui.toast("请假审批数字角标获取失败")
+		}
+	});
 }
