@@ -119,6 +119,7 @@ function setBadge(userName,uid) {
 		timeout: 3000,
 		dataType:"json",
 		success: function(d) {
+			console.log(d)
 			var v = d.data.tp_no;
 			if(v > 0) {
 				var _span = $("<span class='mui-badge2'>")
@@ -146,7 +147,7 @@ function setBadge(userName,uid) {
 				}
 			}
 		},
-		error(xhr, textStatus, e){
+		error:function(xhr, textStatus, e){
 			mui.toast("投票数字角标获取失败")
 		}
 	});
@@ -184,7 +185,7 @@ function setBadge(userName,uid) {
 				}
 			}
 		},
-		error(xhr, textStatus, e){
+		error:function(xhr, textStatus, e){
 			mui.toast("请假审批数字角标获取失败")
 		}
 	});

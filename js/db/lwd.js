@@ -4,8 +4,6 @@ function xmsfw(userName){
 		timeout: 3000,
 		dataType: 'json',
 		success: function(data) {
-			console.log(data)
-			console.log(userName)
 			var count = 0;
 			$.each(data, function(key, value) {
 				count += value;
