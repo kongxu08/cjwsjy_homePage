@@ -125,6 +125,7 @@
 		
 		$('#收文待办').on('click', function() {
 			var url = appUrl + '/CEGWAPServer/GWManage/sw/transact/' + u;
+			console.log(url)
 			openWebViewFunction(url,"公文管理-收文")
 		})
 		$('#发文待办').on('click', function() {
