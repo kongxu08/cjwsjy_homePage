@@ -325,6 +325,15 @@
 							<div class="mui-media-body2">我的投票</div>
 						</a>
 					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" 
+						id="hs_ywgd"
+						style="display: none;">
+						<a href="###">
+							<span class="mui-icon2">
+								<img src="images/moudle/hs_ywgd.png" width="64px" /></span>
+							<div class="mui-media-body2">运维工单</div>
+						</a>
+					</li>
 				</ul>
 			</div>
 
@@ -629,6 +638,18 @@
 					var user = data.userList.filter(function(e) {
 						return e.USERNAME == u;
 					});
+					var user_orgs = data.user_orgList.filter(function(e){
+						return e.USER_RID==user[0].USERID;
+					});
+					console.log(user_orgs)
+					var officeId = ''
+					for(var i=0;i<user_orgs.length;i++){
+						if(i>0){
+							officeId+=','
+						}
+						officeId+=user_orgs[i].ORG_RID
+					}
+					user[0].officeId=officeId;
 					localStorage.setItem('uo', JSON.stringify(user[0]));
 
 					initUser(JSON.parse(localStorage.getItem('uo')))
@@ -791,6 +812,13 @@
 
 				});
 			})
+			
+			//判断是否显示运维工单
+			if(u.officeId.indexOf('3127F033-DAD6-419A-9510-84736E60E886')!=-1
+			 ||u.officeId.indexOf('0D6BE3F8-D690-4463-9879-229D524FFE3E')!=-1
+			){
+				$('#hs_ywgd').show()
+			}
 		}
 
 		//给手机调用的方法，登陆后把传入版本信息
