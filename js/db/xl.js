@@ -119,7 +119,6 @@ function setBadge(userName,uid) {
 		timeout: 3000,
 		dataType:"json",
 		success: function(d) {
-			console.log(d)
 			var v = d.data.tp_no;
 			if(v > 0) {
 				var _span = $("<span class='mui-badge2'>")

@@ -215,6 +215,12 @@
 							<div class="mui-media-body2">战略管理</div>
 						</a>
 					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="display: none;" id="tender">
+						<a href="secondPage/xmgl/tender.html">
+							<span class="mui-icon2" id="market"><img src="images/moudle/btn_home_ztbgl.png" width="64px" /></span>
+							<div class="mui-media-body2">招投标管理</div>
+						</a>
+					</li>
 					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
 						<a href="secondPage/xmgl/market.html">
 							<span class="mui-icon2" id="market"><img src="images/moudle/btn_home_jygl.png" width="64px" /></span>
@@ -641,7 +647,6 @@
 					var user_orgs = data.user_orgList.filter(function(e){
 						return e.USER_RID==user[0].USERID;
 					});
-					console.log(user_orgs)
 					var officeId = ''
 					for(var i=0;i<user_orgs.length;i++){
 						if(i>0){
@@ -788,6 +793,10 @@
 				openDWebViewFunction("http://moa.cispdr.com:8087/toupiao.html?uid=" + u.USERID, "人力资源-投票",
 					"http://moa.cispdr.com:8087/toupiao.html?uid=" + u.USERID)
 			})
+			//运维工单
+			$('#hs_ywgd').on('click', function() {
+				openDWebViewFunction("http://moa.cispdr.com:8066/cjwsjy_app_system/hs_maintenance/", "宏数公司-运维工单","http://moa.cispdr.com:8066/cjwsjy_app_system/hs_maintenance/#/")
+			})
 			//人才查询点击事件
 			$('#rl_rccx').on('click', function() {
 				var data = {};
@@ -816,8 +825,11 @@
 			//判断是否显示运维工单
 			if(u.officeId.indexOf('3127F033-DAD6-419A-9510-84736E60E886')!=-1
 			 ||u.officeId.indexOf('0D6BE3F8-D690-4463-9879-229D524FFE3E')!=-1
+			 ||u.officeId.indexOf('5F5F59A4-0449-4AA5-8AF9-9B553E8B878F')!=-1
+			 ||u.officeId.indexOf('C4C8F5D0-80BD-4088-9585-B7FC2E37D969')!=-1
 			){
 				$('#hs_ywgd').show()
+				$('#tender').show()
 			}
 		}
 
