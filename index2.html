@@ -215,9 +215,9 @@
 							<div class="mui-media-body2">战略管理</div>
 						</a>
 					</li>
-					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="display: none;" id="tender">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" style="display: none;" >
 						<a href="secondPage/xmgl/tender.html">
-							<span class="mui-icon2" id="market"><img src="images/moudle/btn_home_ztbgl.png" width="64px" /></span>
+							<span class="mui-icon2" id="tender"><img src="images/moudle/btn_home_ztbgl.png" width="64px" /></span>
 							<div class="mui-media-body2">招投标管理</div>
 						</a>
 					</li>
@@ -630,8 +630,9 @@
 					"http://moa.cispdr.com:8066/fy-mobile/#/")
 			})
 			$('#xctb').on('click', function() {
-				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/", "疫情应急管理平台",
-					"http://moa.cispdr.com:8066/fy-mobile/#/")
+				var timestamp = (new Date()).valueOf();
+				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/?v="+timestamp, "疫情应急管理平台",
+					"http://moa.cispdr.com:8066/fy-mobile/?v="+timestamp+"#/")
 			})
 
 		})
@@ -771,8 +772,9 @@
 			})
 			//工作绩效
 			$('#gzjx').on('click', function() {
-				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/gzjx/", "人力资源-工作绩效管理平台",
-					"http://moa.cispdr.com:8066/fy-mobile/gzjx/#/")
+				var timestamp = (new Date()).valueOf();
+				openDWebViewFunction("http://moa.cispdr.com:8066/fy-mobile/gzjx/?v="+timestamp, "人力资源-工作绩效管理平台",
+					"http://moa.cispdr.com:8066/fy-mobile/gzjx/?v="+timestamp+"#/")
 			})
 			//请假申请
 			$('#qjsq').on('click', function() {
@@ -829,7 +831,7 @@
 			 ||u.officeId.indexOf('C4C8F5D0-80BD-4088-9585-B7FC2E37D969')!=-1
 			){
 				$('#hs_ywgd').show()
-				$('#tender').show()
+				$('#tender').parent().parent().show()
 			}
 		}
 

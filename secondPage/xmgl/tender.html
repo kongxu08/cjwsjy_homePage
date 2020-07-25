@@ -132,7 +132,7 @@
 		$('span.mui-badge').remove();
 		//取待办
 		$.ajax({
-			url: "http://moa.cispdr.com:8087/dsp.gw/badge/db_count?type=tender&userName="+u,
+			url: "http://moa.cispdr.com:8066/mobile/ui/count/GetFlowCount.ashx?&Classify=tender&action=getcount&userId="+uid,
 			timeout: 3000,
 			dataType: 'json',
 			success: function(data) {

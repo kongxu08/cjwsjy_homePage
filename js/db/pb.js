@@ -3,6 +3,8 @@ function xmgl(userId) {
 	var design = 'http://moa.cispdr.com:8066/mobile/ui/count/GetFlowCount.ashx?&Classify=kcsj&action=getcount&userId='+userId;
 	var epc = 'http://moa.cispdr.com:8066/mobile/ui/count/GetFlowCount.ashx?&Classify=zcb&action=getcount&userId='+userId;
 	var supervisor = 'http://moa.cispdr.com:8066/mobile/ui/count/GetFlowCount.ashx?&Classify=jl&action=getcount&userId='+userId;
+	var tender = 'http://moa.cispdr.com:8066/mobile/ui/count/GetFlowCount.ashx?&Classify=tender&action=getcount&userId='+userId;
+
 	$.ajax({
 		url: market,
 		timeout: 3000,
@@ -135,6 +137,42 @@ function xmgl(userId) {
 					$('#supervisor').find('span').html(total)
 				} else {
 					$('#supervisor').append(_span)
+				}
+				if ($('#总数').find('span').length == 0) {
+					var _spanTotal = _span.clone()
+					$('#总数').append(_spanTotal)
+				} else {
+					var total = parseInt($('#总数').find('span').html());
+					total += parseInt(count);
+					$('#总数').find('span').html(total)
+				}
+			}
+		}
+	});
+	$.ajax({
+		url: tender,
+		timeout: 3000,
+		dataType: 'json',
+		success: function(data) {
+			var count = 0;
+			$.each(data, function(key, value) {
+				count += value;
+			});
+			if (count > 0) {
+				var _span = $("<span class='mui-badge2'>")
+				_span.html(count)
+				if (count.length == 3) {
+					_span.css("margin-left", "-35px")
+				}
+				if (count.length == 4) {
+					_span.css("margin-left", "-40px")
+				}
+				if ($('#tender').find('span').length != 0) {
+					var total = parseInt($('#tender').find('span').html());
+					total += parseInt(count);
+					$('#tender').find('span').html(total)
+				} else {
+					$('#tender').append(_span)
 				}
 				if ($('#总数').find('span').length == 0) {
 					var _spanTotal = _span.clone()
